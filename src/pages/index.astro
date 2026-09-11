@@ -26,7 +26,7 @@ const organizationSchema = {
       <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
-    <a class="header-link" href="#collection">Collection</a>
+    <a class="header-link" href="#collection">Bottles</a>
   </header>
 
   <main id="main">
@@ -35,7 +35,7 @@ const organizationSchema = {
         <p class="eyebrow">Pakistan · independent fragrance</p>
         <h1 id="hero-title">A little heaven.<br /><em>Held by nature.</em></h1>
         <p class="hero-intro">Transparent glass, a considered label and a wooden cap. Heaven &amp; Nature makes room for fragrance to speak quietly.</p>
-        <a class="text-link" href="#collection">View the collection</a>
+        <a class="text-link" href="#collection">View the bottles</a>
       </div>
       <figure class="hero-still-life">
         <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" />
@@ -45,9 +45,9 @@ const organizationSchema = {
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-heading">
-        <p class="eyebrow">Current &amp; forthcoming</p>
-        <h2 id="collection-title">The collection</h2>
-        <p>A first look at the bottle collection. Release, ordering and fragrance details follow when the brand confirms them.</p>
+        <p class="eyebrow">Photographed releases</p>
+        <h2 id="collection-title">Bottles &amp; boxes</h2>
+        <p>A visual index of the fragrances and presentation styles photographed so far. Availability and ordering will appear after the brand confirms them.</p>
       </div>
       {batches.length ? (
         <ol class="release-index">
@@ -63,18 +63,11 @@ const organizationSchema = {
         <img src={withBase("/batches/presentation-box.jpg")} alt="An open H&N Scents presentation box beside its closed floral box." width="1200" height="1200" loading="lazy" decoding="async" />
       </figure>
       <div class="craft-copy">
-        <p class="eyebrow">The object</p>
-        <h2 id="craft-title">Made to sit beautifully.</h2>
-        <p>Clear glass keeps the colour of each fragrance visible. The cap brings warmth. The label gives every bottle its own place.</p>
-        <p class="quiet">The collection is photographed as it takes shape; final release and fragrance details are added only when they are confirmed.</p>
+        <p class="eyebrow">The bottle</p>
+        <h2 id="craft-title">Glass, wood, and a label.</h2>
+        <p>Clear glass lets the fragrance remain visible. A wooden cap adds warmth. Each label gives the bottle a distinct identity.</p>
+        <p class="quiet">These images show the objects themselves; release names, notes and ordering details will be added when they are confirmed.</p>
       </div>
-    </section>
-
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <p class="eyebrow">Stay close</p>
-      <h2 id="contact-title">The next release is taking shape.</h2>
-      <p>Ordering details and official channels will appear here with the first launch.</p>
-      <p class="contact-status">Official channels to be confirmed</p>
     </section>
   </main>
 
