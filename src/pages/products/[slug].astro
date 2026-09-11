@@ -33,13 +33,13 @@ const productSchema = batch.price !== undefined && batch.image && configuredSite
 <BaseLayout title={`${batch.name} | ${site.name}`} description={batch.description} path={`/products/${batch.slug}/`} image={batch.image}>
   {productSchema && <StructuredData data={productSchema} />}
   <main id="main" class="product-page">
-    <a class="product-back text-link" href={withBase("/")}>Back to collection <span aria-hidden="true">←</span></a>
+    <a class="product-back text-link" href={withBase("/")}>Back to collection</a>
     <article class="product-detail">
       <div class="product-image">
         {batch.image ? <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} /> : <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>}
       </div>
       <div class="product-copy">
-        <p class="eyebrow">{batch.status === "available" ? "Available" : "Coming soon"}</p>
+        <p class="eyebrow">{batch.status === "available" ? "Available" : "Collection preview"}</p>
         <h1>{batch.name}</h1>
         <p>{batch.description}</p>
         {batch.size && <p><strong>Size:</strong> {batch.size}</p>}

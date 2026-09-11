@@ -4,9 +4,10 @@ import { withBase } from "../data/site";
 
 interface Props {
   batch: Batch;
+  index: number;
 }
 
-const { batch } = Astro.props;
+const { batch, index } = Astro.props;
 const statusLabel = {
   catalogue: "Collection",
   upcoming: "Coming soon",
@@ -15,22 +16,22 @@ const statusLabel = {
 }[batch.status];
 ---
 
-<article class="batch-card reveal">
-  <div class="batch-image">
+<li class="release-entry">
+  <article class="release-piece">
+    <figure class="release-image">
     {batch.image ? (
       <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} loading="lazy" decoding="async" />
     ) : (
       <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>
     )}
-  </div>
-  <div class="batch-meta">
-    <p class="batch-status">{statusLabel}</p>
-    <h3>{batch.name}</h3>
-    {batch.collection && <p class="batch-collection">{batch.collection}</p>}
-    <p class="batch-notes">{batch.shortDescription}</p>
-    <div class="batch-bottom">
-      <span>{batch.size || "Details to be confirmed"}</span>
-      {batch.price !== undefined && <span class="batch-price">PKR {batch.price.toLocaleString("en-PK")}</span>}
+    </figure>
+    <div class="release-copy">
+      <p class="release-number">{String(index + 1).padStart(2, "0")}</p>
+      <p class="batch-status">{statusLabel}</p>
+      <h3>{batch.name}</h3>
+      {batch.collection && <p class="batch-collection">{batch.collection}</p>}
+      <p class="batch-notes">{batch.shortDescription}</p>
+      <p class="release-spec">{batch.size || "Details to be confirmed"}</p>
     </div>
-  </div>
-</article>
+  </article>
+</li>

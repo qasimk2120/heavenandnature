@@ -26,46 +26,43 @@ const organizationSchema = {
       <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
-    <a class="header-link" href="#collection">Explore releases <span aria-hidden="true">↓</span></a>
+    <a class="header-link" href="#collection">Collection</a>
   </header>
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy reveal">
+      <div class="hero-copy">
         <p class="eyebrow">Pakistan · independent fragrance</p>
         <h1 id="hero-title">A little heaven.<br /><em>Held by nature.</em></h1>
         <p class="hero-intro">Transparent glass, a considered label and a wooden cap. Heaven &amp; Nature makes room for fragrance to speak quietly.</p>
-        <a class="text-link" href="#collection">See the current release <span aria-hidden="true">→</span></a>
+        <a class="text-link" href="#collection">View the collection</a>
       </div>
-      <figure class="hero-still-life reveal">
+      <figure class="hero-still-life">
         <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" />
         <figcaption>From the opening collection</figcaption>
       </figure>
     </section>
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
-      <div class="section-heading reveal">
+      <div class="section-heading">
         <p class="eyebrow">Current &amp; forthcoming</p>
         <h2 id="collection-title">The collection</h2>
         <p>A first look at the bottle collection. Release, ordering and fragrance details follow when the brand confirms them.</p>
       </div>
       {batches.length ? (
-        <div class="batch-grid">
-          {batches.map((batch) => <BatchCard batch={batch} />)}
-        </div>
+        <ol class="release-index">
+          {batches.map((batch, index) => <BatchCard batch={batch} index={index} />)}
+        </ol>
       ) : (
-        <p class="empty-state reveal">The first release will be announced here.</p>
+        <p class="empty-state">The first release will be announced here.</p>
       )}
     </section>
 
     <section class="craft" id="story" aria-labelledby="craft-title">
-      <div class="craft-art reveal" aria-hidden="true">
-        <div class="wood-grain grain-one"></div>
-        <div class="wood-grain grain-two"></div>
-        <div class="wood-grain grain-three"></div>
-        <div class="glass-orb"></div>
-      </div>
-      <div class="craft-copy reveal">
+      <figure class="craft-art">
+        <img src={withBase("/batches/presentation-box.jpg")} alt="An open H&N Scents presentation box beside its closed floral box." width="1200" height="1200" loading="lazy" decoding="async" />
+      </figure>
+      <div class="craft-copy">
         <p class="eyebrow">The object</p>
         <h2 id="craft-title">Made to sit beautifully.</h2>
         <p>Clear glass keeps the colour of each fragrance visible. The cap brings warmth. The label gives every bottle its own place.</p>
@@ -73,11 +70,11 @@ const organizationSchema = {
       </div>
     </section>
 
-    <section class="contact reveal" id="contact" aria-labelledby="contact-title">
+    <section class="contact" id="contact" aria-labelledby="contact-title">
       <p class="eyebrow">Stay close</p>
       <h2 id="contact-title">The next release is taking shape.</h2>
       <p>Ordering details and official channels will appear here with the first launch.</p>
-      <span class="contact-status">Contact to be confirmed</span>
+      <p class="contact-status">Official channels to be confirmed</p>
     </section>
   </main>
 
@@ -87,6 +84,7 @@ const organizationSchema = {
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
     <p>Fragrance, held in nature.</p>
+    <nav aria-label="Legal links"><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
     <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
   </footer>
 </BaseLayout>
