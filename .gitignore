@@ -7,6 +7,9 @@ dist/
 .env
 .env.local
 
+# Local recovery only; never commit prior install artifacts.
+_install-recovery/
+
 # OS files
 Thumbs.db
 Desktop.ini
