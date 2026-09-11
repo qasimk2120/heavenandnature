@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../data/site";
+---
+
+<BaseLayout title="Page not found | Heaven & Nature" description="The requested Heaven and Nature page could not be found.">
+  <main id="main" class="not-found">
+    <p class="eyebrow">404</p>
+    <h1>This page has moved on.</h1>
+    <a class="text-link" href={withBase("/")}>Return to Heaven &amp; Nature <span aria-hidden="true">→</span></a>
+  </main>
+</BaseLayout>

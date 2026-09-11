@@ -1,0 +1,35 @@
+---
+import type { Batch } from "../data/batches";
+import { withBase } from "../data/site";
+
+interface Props {
+  batch: Batch;
+}
+
+const { batch } = Astro.props;
+const statusLabel = {
+  upcoming: "Coming soon",
+  available: "Available",
+  "sold-out": "Sold out"
+}[batch.status];
+---
+
+<article class="batch-card reveal">
+  <div class="batch-image">
+    {batch.image ? (
+      <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} loading="lazy" decoding="async" />
+    ) : (
+      <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>
+    )}
+  </div>
+  <div class="batch-meta">
+    <p class="batch-status">{statusLabel}</p>
+    <h3>{batch.name}</h3>
+    {batch.collection && <p class="batch-collection">{batch.collection}</p>}
+    <p class="batch-notes">{batch.shortDescription}</p>
+    <div class="batch-bottom">
+      <span>{batch.size || "Details to be confirmed"}</span>
+      {batch.price !== undefined && <span class="batch-price">PKR {batch.price.toLocaleString("en-PK")}</span>}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import { batches } from "../../data/batches";
+import { absoluteUrl, configuredSiteUrl, site, withBase } from "../../data/site";
+
+export function getStaticPaths() {
+  return batches.filter((batch) => batch.published).map((batch) => ({
+    params: { slug: batch.slug },
+    props: { batch }
+  }));
+}
+
+const { batch } = Astro.props;
+const productSchema = batch.price !== undefined && batch.image && configuredSiteUrl ? {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: batch.name,
+  description: batch.description,
+  image: absoluteUrl(batch.image),
+  sku: batch.sku,
+  brand: { "@type": "Brand", name: site.name },
+  offers: {
+    "@type": "Offer",
+    priceCurrency: batch.currency || "PKR",
+    price: batch.price,
+    availability: batch.status === "available" ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    url: absoluteUrl(`/products/${batch.slug}/`)
+  }
+} : null;
+---
+
+<BaseLayout title={`${batch.name} | ${site.name}`} description={batch.description} path={`/products/${batch.slug}/`} image={batch.image}>
+  {productSchema && <StructuredData data={productSchema} />}
+  <main id="main" class="product-page">
+    <a class="product-back text-link" href={withBase("/")}>Back to collection <span aria-hidden="true">←</span></a>
+    <article class="product-detail">
+      <div class="product-image">
+        {batch.image ? <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} /> : <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>}
+      </div>
+      <div class="product-copy">
+        <p class="eyebrow">{batch.status === "available" ? "Available" : "Coming soon"}</p>
+        <h1>{batch.name}</h1>
+        <p>{batch.description}</p>
+        {batch.size && <p><strong>Size:</strong> {batch.size}</p>}
+        {batch.price !== undefined && <p><strong>Price:</strong> PKR {batch.price.toLocaleString("en-PK")}</p>}
+      </div>
+    </article>
+  </main>
+</BaseLayout>
