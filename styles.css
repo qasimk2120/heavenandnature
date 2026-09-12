@@ -216,12 +216,37 @@ h1 { font-size: clamp(3.2rem, 6.5vw, 6.3rem); line-height: .9; }
   font-size: .9rem;
 }
 
-.delivery-note span {
+.delivery-note-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  min-height: 40px;
+}
+
+.delivery-note-label > span:last-child {
   color: var(--muted);
   font-family: var(--mono);
   font-size: .62rem;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.delivery-note-icon {
+  display: inline-grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  color: var(--cedar);
+}
+
+.delivery-note-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.25;
 }
 
 .delivery-note strong {
