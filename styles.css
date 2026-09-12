@@ -165,6 +165,25 @@ h1 { font-size: clamp(3.2rem, 6.5vw, 6.3rem); line-height: .9; }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 
+.delivery-note {
+  display: flex;
+  gap: .75rem;
+  align-items: baseline;
+  margin: 2.75rem 0 0;
+  padding-top: .85rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: .84rem;
+}
+
+.delivery-note span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
 .text-link {
   display: inline-block;
   padding-bottom: .2rem;
