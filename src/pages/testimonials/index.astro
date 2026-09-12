@@ -30,16 +30,29 @@ const pageSchema = {
       <p data-i18n="notes.intro">We’re gathering the first approved WhatsApp and Instagram notes here. Each one will be shown with its source and the scent it refers to, once confirmed.</p>
     </div>
 
-    <div class="notes-gallery" aria-label="H&N Scents collection imagery">
-      <figure>
-        <img src={withBase("/batches/collection-flat-lay.jpg")} alt="H&N Scents bottles arranged around the presentation box." width="1200" height="1500" loading="lazy" decoding="async" />
-      </figure>
-      <figure>
-        <img src={withBase("/batches/pacific-chill-258.jpg")} alt="Pacific Chill 258 bottle with a pale blue label." width="900" height="972" loading="lazy" decoding="async" />
-      </figure>
-      <figure>
-        <img src={withBase("/batches/oud-satin-mood-269.jpg")} alt="Oud Satin Mood 269 bottle with a deep plum label." width="900" height="972" loading="lazy" decoding="async" />
-      </figure>
+    <div class="notes-gallery" data-notes-carousel aria-label="H&N Scents collection imagery">
+      <div class="notes-carousel-viewport">
+        <div class="notes-carousel-track" data-carousel-track>
+          <figure class="notes-slide" data-carousel-slide>
+            <img src={withBase("/batches/collection-flat-lay.jpg")} alt="H&N Scents bottles arranged around the presentation box." width="1200" height="1500" loading="eager" decoding="async" />
+          </figure>
+          <figure class="notes-slide" data-carousel-slide>
+            <img src={withBase("/batches/pacific-chill-258.jpg")} alt="Pacific Chill 258 bottle with a pale blue label." width="900" height="972" loading="eager" decoding="async" />
+          </figure>
+          <figure class="notes-slide" data-carousel-slide>
+            <img src={withBase("/batches/oud-satin-mood-269.jpg")} alt="Oud Satin Mood 269 bottle with a deep plum label." width="900" height="972" loading="eager" decoding="async" />
+          </figure>
+        </div>
+      </div>
+      <div class="notes-carousel-controls">
+        <button class="notes-carousel-arrow" type="button" data-carousel-prev aria-label="Previous image" data-i18n-aria-label="notes.previous">←</button>
+        <div class="notes-carousel-dots" role="tablist" aria-label="Select image" data-i18n-aria-label="notes.selectImage">
+          <button type="button" role="tab" aria-label="Show image 1" aria-selected="true" data-carousel-dot="0" data-i18n-aria-label="notes.imageOne"></button>
+          <button type="button" role="tab" aria-label="Show image 2" aria-selected="false" data-carousel-dot="1" data-i18n-aria-label="notes.imageTwo"></button>
+          <button type="button" role="tab" aria-label="Show image 3" aria-selected="false" data-carousel-dot="2" data-i18n-aria-label="notes.imageThree"></button>
+        </div>
+        <button class="notes-carousel-arrow" type="button" data-carousel-next aria-label="Next image" data-i18n-aria-label="notes.next">→</button>
+      </div>
     </div>
 
     <div class="notes-ledger" aria-label="Customer review sources">
@@ -75,3 +88,22 @@ const pageSchema = {
     <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
   </footer>
 </BaseLayout>
+
+<script>
+  const carousel = document.querySelector<HTMLElement>("[data-notes-carousel]");
+  const track = carousel?.querySelector<HTMLElement>("[data-carousel-track]");
+  const slides = carousel ? [...carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]")] : [];
+  const dots = carousel ? [...carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]")] : [];
+  let activeSlide = 0;
+
+  const showSlide = (index: number) => {
+    if (!track || !slides.length) return;
+    activeSlide = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${activeSlide * 100}%)`;
+    dots.forEach((dot, dotIndex) => dot.setAttribute("aria-selected", String(dotIndex === activeSlide)));
+  };
+
+  carousel?.querySelector<HTMLButtonElement>("[data-carousel-prev]")?.addEventListener("click", () => showSlide(activeSlide - 1));
+  carousel?.querySelector<HTMLButtonElement>("[data-carousel-next]")?.addEventListener("click", () => showSlide(activeSlide + 1));
+  dots.forEach((dot) => dot.addEventListener("click", () => showSlide(Number(dot.dataset.carouselDot || 0))));
+</script>

@@ -748,22 +748,86 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
 }
 
 .notes-gallery {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr 1fr;
-  gap: .8rem;
+  width: min(100%, 32rem);
   margin: clamp(1.5rem, 3vw, 2.75rem) 0 0;
 }
 
-.notes-gallery figure { margin: 0; }
+.notes-carousel-viewport { overflow: hidden; }
+
+.notes-carousel-track {
+  display: flex;
+  transition: transform .35s cubic-bezier(.2, 0, 0, 1);
+}
+
+.notes-slide {
+  flex: 0 0 100%;
+  margin: 0;
+}
 
 .notes-gallery img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
+  outline: 1px solid rgba(0, 0, 0, .1);
+  outline-offset: -1px;
 }
 
-.notes-gallery figure:first-child img { aspect-ratio: 1.35 / 1; }
+.notes-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .7rem;
+}
+
+.notes-carousel-arrow,
+.notes-carousel-dots button {
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.notes-carousel-arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.notes-carousel-arrow:hover,
+.notes-carousel-dots button:hover,
+.notes-carousel-dots button[aria-selected="true"] { border-color: var(--cedar); color: var(--cedar); }
+
+.notes-carousel-arrow:active,
+.notes-carousel-dots button:active { transform: scale(.96); }
+
+.notes-carousel-dots { display: flex; gap: .35rem; }
+
+.notes-carousel-dots button {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+}
+
+.notes-carousel-dots button::after {
+  width: .38rem;
+  height: .38rem;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+  opacity: .35;
+}
+
+.notes-carousel-dots button[aria-selected="true"]::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .notes-carousel-track { transition: none; }
+}
 
 .notes-ledger {
   display: grid;
@@ -956,10 +1020,6 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   .notes-heading h1 { white-space: normal; font-size: clamp(3.6rem, 15vw, 6.8rem); }
 
   .notes-heading > p:last-child { margin-top: .25rem; }
-
-  .notes-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  .notes-gallery figure:first-child { grid-column: 1 / -1; }
 
   .notes-ledger { grid-template-columns: 1fr; gap: 2.5rem; }
 
