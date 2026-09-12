@@ -1,7 +1,8 @@
 name: Deploy site to GitHub Pages
 
 on:
-  # Publishing stays deliberate until the brand owner approves the public draft.
+  push:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
