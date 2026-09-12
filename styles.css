@@ -760,7 +760,7 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
 
 .notes-gallery {
   width: min(100%, 32rem);
-  margin: clamp(1.5rem, 3vw, 2.75rem) 0 0;
+  margin: clamp(1.5rem, 3vw, 2.75rem) auto 0;
 }
 
 .notes-carousel-viewport {
