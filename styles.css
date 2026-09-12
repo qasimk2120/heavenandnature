@@ -162,12 +162,12 @@ main { width: min(1400px, calc(100% - 4rem)); margin: 0 auto; }
   padding: clamp(.75rem, 1.5vw, 1.5rem) 0 clamp(4rem, 7vw, 7rem);
 }
 
-.hero-still-life { width: min(100%, 620px); margin: 0; }
+.hero-still-life { width: min(100%, 500px); margin: 0 auto; }
 
 .hero-still-life img {
   display: block;
   width: 100%;
-  height: min(54vh, 570px);
+  height: min(48vh, 480px);
   object-fit: cover;
   object-position: center;
 }
@@ -999,9 +999,9 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
 
   .hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: .75rem; padding-bottom: 4.5rem; }
 
-  .hero-still-life { width: 100%; }
+  .hero-still-life { width: min(100%, 26rem); }
 
-  .hero-still-life img { height: min(112vw, 460px); aspect-ratio: 4 / 5; }
+  .hero-still-life img { height: min(100vw, 360px); aspect-ratio: 4 / 5; }
 
   .hero-copy { max-width: 32rem; }
 
@@ -1063,7 +1063,7 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
 
   .catalogue-caption h3 { font-size: clamp(1.15rem, 5.4vw, 1.5rem); }
 
-  .hero-still-life img { height: min(100vw, 430px); max-height: 430px; }
+  .hero-still-life img { height: min(100vw, 340px); max-height: 340px; }
 
   .site-nav { gap: 0; }
 
