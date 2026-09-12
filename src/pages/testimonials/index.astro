@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import { absoluteUrl, whatsappUrl, withBase } from "../../data/site";
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Customer notes | H&N Scents",
+  description: "Approved customer notes from WhatsApp and Instagram for H&N Scents.",
+  url: absoluteUrl("/testimonials/"),
+  isPartOf: { "@type": "WebSite", name: "Heaven & Nature", url: absoluteUrl("/") }
+};
+---
+
+<BaseLayout
+  title="Customer notes | H&N Scents"
+  description="Approved customer notes from WhatsApp and Instagram for H&N Scents."
+  path="/testimonials/"
+>
+  <StructuredData data={pageSchema} />
+
+  <header class="site-header">
+    <a class="brand-lockup" href={withBase("/")} aria-label="Heaven and Nature home">
+      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
+      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href={withBase("/")}>Home</a>
+      <a href={withBase("/#collection")}>The bottles</a>
+      <a href={withBase("/#story")}>Packaging</a>
+      <a href={withBase("/contact/")}>Contact</a>
+      <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
+    </nav>
+  </header>
+
+  <main id="main" class="notes-page">
+    <div class="notes-heading">
+      <p class="eyebrow">From the people who wear it</p>
+      <h1>Customer notes</h1>
+      <p>We’re gathering the first approved WhatsApp and Instagram notes here. Each one will be shown with its source and the scent it refers to, once confirmed.</p>
+    </div>
+
+    <div class="notes-ledger" aria-label="Customer review sources">
+      <section class="notes-source" aria-labelledby="whatsapp-notes-title">
+        <p class="notes-source-label">01 · WhatsApp</p>
+        <h2 id="whatsapp-notes-title">The messages people send us</h2>
+        <p>Approved screenshots or wording will be framed here with the product name and date, keeping the customer’s voice intact.</p>
+        <p class="notes-pending">Reviews will appear here after the original message or approved wording is supplied.</p>
+      </section>
+
+      <section class="notes-source" aria-labelledby="instagram-notes-title">
+        <p class="notes-source-label">02 · Instagram</p>
+        <h2 id="instagram-notes-title">Notes from the feed</h2>
+        <p>Instagram mentions and story replies will be credited to the handle only when permission and the final wording are confirmed.</p>
+        <p class="notes-pending">Reviews will appear here after the original post, story or approved wording is supplied.</p>
+      </section>
+    </div>
+
+    <div class="notes-actions">
+      <p class="eyebrow">Have a note to share?</p>
+      <p>Send the original WhatsApp message or Instagram screenshot. We’ll confirm how you’d like it credited before it goes live.</p>
+      <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to share a customer review.")} target="_blank" rel="noreferrer">Share a review <span aria-hidden="true">↗</span></a>
+    </div>
+  </main>
+
+  <footer>
+    <a class="brand-lockup" href={withBase("/")}>
+      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
+      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+    </a>
+    <p>Fragrance, held in nature.</p>
+    <nav aria-label="Footer links"><a href={withBase("/contact/")}>Contact</a><a href={withBase("/testimonials/")}>Customer notes</a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
+    <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
+  </footer>
+</BaseLayout>
