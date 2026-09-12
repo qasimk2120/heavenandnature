@@ -30,16 +30,28 @@ const pageSchema = {
       <p data-i18n="notes.intro">We’re gathering the first approved WhatsApp and Instagram notes here. Each one will be shown with its source and the scent it refers to, once confirmed.</p>
     </div>
 
+    <div class="notes-gallery" aria-label="H&N Scents collection imagery">
+      <figure>
+        <img src={withBase("/batches/collection-flat-lay.jpg")} alt="H&N Scents bottles arranged around the presentation box." width="1200" height="1500" loading="lazy" decoding="async" />
+      </figure>
+      <figure>
+        <img src={withBase("/batches/pacific-chill-258.jpg")} alt="Pacific Chill 258 bottle with a pale blue label." width="900" height="972" loading="lazy" decoding="async" />
+      </figure>
+      <figure>
+        <img src={withBase("/batches/oud-satin-mood-269.jpg")} alt="Oud Satin Mood 269 bottle with a deep plum label." width="900" height="972" loading="lazy" decoding="async" />
+      </figure>
+    </div>
+
     <div class="notes-ledger" aria-label="Customer review sources">
       <section class="notes-source" aria-labelledby="whatsapp-notes-title">
-        <p class="notes-source-label" data-i18n="notes.whatsappLabel">01 · WhatsApp</p>
+        <p class="notes-source-label"><span class="notes-source-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.7 4.3A9.8 9.8 0 0 0 3.4 16.2L2.5 21.5l5.4-1.4A9.8 9.8 0 1 0 19.7 4.3Z"/><path d="M8.2 7.8c.2-.4.5-.4.8-.4h.6c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4-.1.6l-.6.7c.7 1.2 1.7 2.1 3 2.7l.6-.6c.2-.2.4-.2.6-.1l1.8.8c.3.1.4.3.4.6v.6c0 .3-.1.6-.4.8-.4.3-1 .4-1.5.3-2.2-.5-4.1-1.6-5.6-3.2-1.6-1.5-2.7-3.4-3.2-5.6-.1-.5 0-1.1.3-1.5Z"/></svg></span><span data-i18n="notes.whatsappLabel">01 · WhatsApp</span></p>
         <h2 id="whatsapp-notes-title" data-i18n="notes.whatsappTitle">The messages people send us</h2>
         <p data-i18n="notes.whatsappBody">Approved screenshots or wording will be framed here with the product name and date, keeping the customer’s voice intact.</p>
         <p class="notes-pending" data-i18n="notes.pending">Reviews will appear here after the original message or approved wording is supplied.</p>
       </section>
 
       <section class="notes-source" aria-labelledby="instagram-notes-title">
-        <p class="notes-source-label" data-i18n="notes.instagramLabel">02 · Instagram</p>
+        <p class="notes-source-label"><span class="notes-source-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></span><span data-i18n="notes.instagramLabel">02 · Instagram</span></p>
         <h2 id="instagram-notes-title" data-i18n="notes.instagramTitle">Notes from the feed</h2>
         <p data-i18n="notes.instagramBody">Instagram mentions and story replies will be credited to the handle only when permission and the final wording are confirmed.</p>
         <p class="notes-pending" data-i18n="notes.pending">Reviews will appear here after the original post, story or approved wording is supplied.</p>
