@@ -1,9 +1,11 @@
 export type BatchStatus = "catalogue" | "upcoming" | "available" | "sold-out";
+export type BatchCategory = "fresh" | "floral" | "woody" | "oud";
 
 export type Batch = {
   slug: string;
   name: string;
   status: BatchStatus;
+  category: BatchCategory;
   collection?: string;
   shortDescription: string;
   description: string;
@@ -26,6 +28,7 @@ export const batches: Batch[] = [
     slug: "ganymede-289",
     name: "Ganymede 289",
     status: "catalogue",
+    category: "woody",
     shortDescription: "A stone-grey label, clear glass and a warm wooden cap.",
     description: "Ganymede 289 from the H&N Scents product photography collection.",
     notes: ["Mineral woods", "Saffron", "Suede"],
@@ -39,6 +42,7 @@ export const batches: Batch[] = [
     slug: "les-sables-roses-237",
     name: "Les Sables Roses 237",
     status: "catalogue",
+    category: "floral",
     shortDescription: "A rose-toned bottle presented against soft petals and linen.",
     description: "Les Sables Roses 237 from the H&N Scents product photography collection.",
     notes: ["Rose", "Amber", "Soft spice"],
@@ -52,6 +56,7 @@ export const batches: Batch[] = [
     slug: "layton-263",
     name: "Layton 263",
     status: "catalogue",
+    category: "woody",
     shortDescription: "Amber glass and a black label grounded by a deep walnut cap.",
     description: "Layton 263 from the H&N Scents product photography collection.",
     notes: ["Apple", "Lavender", "Vanilla"],
@@ -65,6 +70,7 @@ export const batches: Batch[] = [
     slug: "gris-dior-258",
     name: "Gris Dior 258",
     status: "catalogue",
+    category: "floral",
     shortDescription: "A quiet silver-grey label set into transparent glass.",
     description: "Gris Dior 258 from the H&N Scents product photography collection.",
     notes: ["Rose", "Moss", "Amber"],
@@ -78,6 +84,7 @@ export const batches: Batch[] = [
     slug: "oud-satin-mood-269",
     name: "Oud Satin Mood 269",
     status: "catalogue",
+    category: "oud",
     shortDescription: "A plum label and sculpted wood cap give the bottle its night-time weight.",
     description: "Oud Satin Mood 269 from the H&N Scents product photography collection.",
     notes: ["Violet", "Rose", "Oud"],
@@ -91,6 +98,7 @@ export const batches: Batch[] = [
     slug: "pacific-chill-258",
     name: "Pacific Chill 258",
     status: "catalogue",
+    category: "fresh",
     shortDescription: "An airy blue label set against a pale, botanical presentation.",
     description: "Pacific Chill 258 from the H&N Scents product photography collection.",
     notes: ["Citrus", "Blackcurrant", "Basil"],

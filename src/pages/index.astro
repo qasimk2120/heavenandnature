@@ -85,6 +85,17 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <p data-i18n="home.collectionIntro">These six bottles are shown as a visual reference from the supplied H&amp;N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.</p>
       </div>
       <p class="collection-delivery"><span data-i18n="home.collectionDeliveryLabel">Wherever you are</span> <span data-i18n="home.collectionDelivery">H&amp;N Scents delivers throughout Pakistan.</span></p>
+      <div class="catalogue-filters" aria-label="Browse by scent style">
+        <p class="eyebrow" data-i18n="home.categoryEyebrow">Browse by scent style</p>
+        <div class="category-filter-list" role="group" aria-label="Scent style filters">
+          <button class="category-filter is-active" type="button" data-category-filter="all" aria-pressed="true" data-i18n="home.categoryAll">All scents</button>
+          <button class="category-filter" type="button" data-category-filter="fresh" aria-pressed="false" data-i18n="home.categoryFresh">Fresh</button>
+          <button class="category-filter" type="button" data-category-filter="floral" aria-pressed="false" data-i18n="home.categoryFloral">Floral</button>
+          <button class="category-filter" type="button" data-category-filter="woody" aria-pressed="false" data-i18n="home.categoryWoody">Woody</button>
+          <button class="category-filter" type="button" data-category-filter="oud" aria-pressed="false" data-i18n="home.categoryOud">Oud</button>
+        </div>
+        <p class="category-filter-status" data-category-filter-status aria-live="polite" data-i18n="home.categoryStatusAll">Showing all six references.</p>
+      </div>
       {batches.length ? (
         <ul class="catalogue-grid">
           {batches.map((batch) => <BatchCard batch={batch} />)}
@@ -92,6 +103,35 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       ) : (
         <p class="empty-state">The first release will be announced here.</p>
       )}
+    </section>
+
+    <section class="ordering-guide" aria-labelledby="ordering-title">
+      <div class="ordering-heading">
+        <p class="eyebrow" data-i18n="home.orderEyebrow">How ordering works</p>
+        <h2 id="ordering-title" data-i18n="home.orderTitle">A simple conversation, not a checkout maze</h2>
+        <p data-i18n="home.orderIntro">Choose a bottle here, then send your selection to the brand on WhatsApp. Availability, price and delivery are confirmed with you directly.</p>
+      </div>
+      <ol class="ordering-steps">
+        <li class="ordering-step">
+          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></span>
+          <span class="ordering-step-number">01</span>
+          <h3 data-i18n="home.orderStepOne">Choose a bottle</h3>
+          <p data-i18n="home.orderStepOneBody">Open the details to see its notes and composition.</p>
+        </li>
+        <li class="ordering-step">
+          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M5 7.5h14v11H5z"></path><path d="M8 7.5a4 4 0 0 1 8 0"></path><path d="M9 12h6"></path></svg></span>
+          <span class="ordering-step-number">02</span>
+          <h3 data-i18n="home.orderStepTwo">Build your selection</h3>
+          <p data-i18n="home.orderStepTwoBody">Add one or more bottles to the cart while you browse.</p>
+        </li>
+        <li class="ordering-step">
+          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M4 5h16v12H4z"></path><path d="m8 21 4-4 4 4"></path><path d="M8 9h8M8 12h5"></path></svg></span>
+          <span class="ordering-step-number">03</span>
+          <h3 data-i18n="home.orderStepThree">Send it on WhatsApp</h3>
+          <p data-i18n="home.orderStepThreeBody">We’ll confirm the current batch, cost and delivery with you.</p>
+        </li>
+      </ol>
+      <a class="ordering-cta text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.orderCta">Start on WhatsApp</span><span class="link-icon" aria-hidden="true">↗</span></a>
     </section>
 
     <section class="craft" id="story" aria-labelledby="craft-title">
@@ -196,6 +236,9 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   const cartItems = document.querySelector<HTMLElement>("[data-cart-items]");
   const cartWhatsapp = document.querySelector<HTMLAnchorElement>("[data-cart-whatsapp]");
   const dialog = document.querySelector<HTMLDialogElement>("[data-product-dialog]");
+  const categoryButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-category-filter]")];
+  const categoryItems = [...document.querySelectorAll<HTMLElement>("[data-product-card]")];
+  const categoryStatus = document.querySelector<HTMLElement>("[data-category-filter-status]");
   let dialogSlug = "";
 
   const saveCart = () => localStorage.setItem(storageKey, JSON.stringify(cart));
@@ -263,6 +306,26 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     renderCart();
   };
 
+  const applyCategory = (category: string) => {
+    const visibleCount = categoryItems.filter((item) => {
+      const visible = category === "all" || item.dataset.category === category;
+      item.hidden = !visible;
+      return visible;
+    }).length;
+    categoryButtons.forEach((button) => {
+      const active = button.dataset.categoryFilter === category;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    if (categoryStatus) {
+      const fallback = category === "all"
+        ? "Showing all six references."
+        : `${visibleCount} ${visibleCount === 1 ? "reference" : "references"} in this style.`;
+      categoryStatus.textContent = localized(category === "all" ? "home.categoryStatusAll" : "home.categoryStatusFiltered", fallback)
+        .replace("{count}", String(visibleCount));
+    }
+  };
+
   document.querySelectorAll<HTMLElement>("[data-cart-open]").forEach((button) => button.addEventListener("click", () => setCartOpen(true)));
   document.querySelectorAll<HTMLElement>("[data-cart-close]").forEach((button) => button.addEventListener("click", () => setCartOpen(false)));
   document.querySelector<HTMLElement>("[data-cart-clear]")?.addEventListener("click", () => { cart = []; saveCart(); renderCart(); });
@@ -275,6 +338,8 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     const decrease = target.closest<HTMLElement>("[data-cart-decrease]");
     if (decrease) updateQuantity(decrease.dataset.cartDecrease || "", -1);
   });
+
+  categoryButtons.forEach((button) => button.addEventListener("click", () => applyCategory(button.dataset.categoryFilter || "all")));
 
   const openDetails = (slug: string) => {
     const product = productBySlug.get(slug);
@@ -295,6 +360,11 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   document.querySelector<HTMLElement>("[data-dialog-add]")?.addEventListener("click", () => { addToCart(dialogSlug); dialog?.close(); });
   dialog?.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
 
-  window.addEventListener("hn:localechange", () => renderCart());
+  window.addEventListener("hn:localechange", () => {
+    renderCart();
+    const active = categoryButtons.find((button) => button.classList.contains("is-active"));
+    applyCategory(active?.dataset.categoryFilter || "all");
+  });
   renderCart();
+  applyCategory("all");
 </script>

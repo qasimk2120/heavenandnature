@@ -39,6 +39,28 @@ const english = {
   "home.collectionIntro": "These six bottles are shown as a visual reference from the supplied H&N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.",
   "home.collectionDeliveryLabel": "Wherever you are",
   "home.collectionDelivery": "H&N Scents delivers throughout Pakistan.",
+  "home.categoryEyebrow": "Browse by scent style",
+  "home.categoryAll": "All scents",
+  "home.categoryFresh": "Fresh",
+  "home.categoryFloral": "Floral",
+  "home.categoryWoody": "Woody",
+  "home.categoryOud": "Oud",
+  "home.categoryStatusAll": "Showing all six references.",
+  "home.categoryStatusFiltered": "Showing {count} references in this style.",
+  "home.category.fresh": "Fresh",
+  "home.category.floral": "Floral",
+  "home.category.woody": "Woody",
+  "home.category.oud": "Oud",
+  "home.orderEyebrow": "How ordering works",
+  "home.orderTitle": "A simple conversation, not a checkout maze",
+  "home.orderIntro": "Choose a bottle here, then send your selection to the brand on WhatsApp. Availability, price and delivery are confirmed with you directly.",
+  "home.orderStepOne": "Choose a bottle",
+  "home.orderStepOneBody": "Open the details to see its notes and composition.",
+  "home.orderStepTwo": "Build your selection",
+  "home.orderStepTwoBody": "Add one or more bottles to the cart while you browse.",
+  "home.orderStepThree": "Send it on WhatsApp",
+  "home.orderStepThreeBody": "We’ll confirm the current batch, cost and delivery with you.",
+  "home.orderCta": "Start on WhatsApp",
   "home.packagingEyebrow": "Packaging details",
   "home.packagingTitle": "The bottle, clearly",
   "home.packagingText": "Clear glass keeps the liquid visible. The wooden cap adds warmth. The printed label gives each bottle its own character.",
@@ -74,6 +96,9 @@ const english = {
   "contact.optionGift": "Gift presentation",
   "contact.optionDelivery": "Delivery",
   "contact.optionOther": "Something else",
+  "contact.whatsappLabel": "WhatsApp",
+  "contact.response": "Send the scent you’re considering, your city and any question. We’ll confirm the current batch, price and delivery directly.",
+  "contact.call": "Call this number",
   "notes.eyebrow": "From the people who wear it",
   "notes.title": "Customer notes",
   "notes.intro": "We’re gathering the first approved WhatsApp and Instagram notes here. Each one will be shown with its source and the scent it refers to, once confirmed.",
@@ -124,6 +149,9 @@ const english = {
 
 const overrides = {
   ur: {
+    "home.categoryEyebrow": "خوشبو کے انداز کے مطابق دیکھیں", "home.categoryAll": "تمام خوشبوئیں", "home.categoryFresh": "تازہ", "home.categoryFloral": "پھولوں والی", "home.categoryWoody": "لکڑی دار", "home.categoryOud": "عود", "home.categoryStatusAll": "تمام چھ نمونے دکھائے جا رہے ہیں۔", "home.categoryStatusFiltered": "اس انداز میں {count} نمونے دکھائے جا رہے ہیں۔", "home.category.fresh": "تازہ", "home.category.floral": "پھولوں والی", "home.category.woody": "لکڑی دار", "home.category.oud": "عود",
+    "home.orderEyebrow": "آرڈر کیسے ہوتا ہے", "home.orderTitle": "سادہ گفتگو، الجھا ہوا چیک آؤٹ نہیں", "home.orderIntro": "یہاں بوتل منتخب کریں، پھر اپنا انتخاب واٹس ایپ پر برانڈ کو بھیجیں۔ دستیابی، قیمت اور ترسیل براہِ راست آپ سے طے کی جائے گی۔", "home.orderStepOne": "بوتل منتخب کریں", "home.orderStepOneBody": "اس کے نوٹس اور کمپوزیشن دیکھنے کے لیے تفصیل کھولیں۔", "home.orderStepTwo": "اپنا انتخاب بنائیں", "home.orderStepTwoBody": "براؤز کرتے ہوئے ایک یا زیادہ بوتلیں کارٹ میں شامل کریں۔", "home.orderStepThree": "واٹس ایپ پر بھیجیں", "home.orderStepThreeBody": "ہم موجودہ بیچ، قیمت اور ترسیل کی تصدیق کریں گے۔", "home.orderCta": "واٹس ایپ پر شروع کریں",
+    "contact.whatsappLabel": "واٹس ایپ", "contact.response": "جس خوشبو میں دلچسپی ہے، اپنا شہر اور سوال بھیجیں۔ ہم موجودہ بیچ، قیمت اور ترسیل کی براہِ راست تصدیق کریں گے۔", "contact.call": "اس نمبر پر کال کریں",
     "language.label": "زبان",
     "nav.home": "ہوم", "nav.bottles": "خوشبوئیں", "nav.packaging": "پیکیجنگ", "nav.contact": "رابطہ", "nav.reviews": "جائزے", "nav.shop": "واٹس ایپ پر خریدیں", "nav.cart": "کارٹ", "nav.menu": "مینو", "nav.close": "بند کریں",
     "footer.tagline": "خوشبو، فطرت کی آغوش میں۔", "footer.contact": "رابطہ", "footer.notes": "صارفین کے تاثرات", "footer.shop": "واٹس ایپ پر خریدیں", "footer.privacy": "رازداری", "footer.terms": "شرائط",
@@ -133,6 +161,9 @@ const overrides = {
     "legal.back": "ہیون اینڈ نیچر پر واپس جائیں", "privacy.eyebrow": "رازداری", "privacy.title": "رازداری، سوچ سمجھ کر", "privacy.receiveTitle": "ہمیں کیا موصول ہوتا ہے", "privacy.imagesTitle": "تصاویر اور تجزیات", "privacy.questionsTitle": "سوالات", "terms.eyebrow": "شرائط", "terms.title": "ایک واضح پہلا تعارف", "terms.productTitle": "مصنوعات کی معلومات", "terms.contentTitle": "تصاویر اور مواد", "terms.updatesTitle": "تازہ کاری", "product.back": "کیٹلاگ پر واپس جائیں", "product.available": "دستیاب", "product.preview": "کیٹلاگ کا پیش نظارہ", "product.size": "سائز:", "product.price": "قیمت:", "notFound.title": "یہ صفحہ کہیں اور منتقل ہو گیا ہے۔", "notFound.return": "ہیون اینڈ نیچر پر واپس جائیں"
   },
   ps: {
+    "home.categoryEyebrow": "د خوشبویۍ د انداز له مخې وګورئ", "home.categoryAll": "ټولې خوشبویۍ", "home.categoryFresh": "تازه", "home.categoryFloral": "ګل لرونکې", "home.categoryWoody": "د لرګي بوی", "home.categoryOud": "عود", "home.categoryStatusAll": "ټولې شپږ نمونې ښودل کېږي.", "home.categoryStatusFiltered": "په دې انداز کې {count} نمونې ښودل کېږي.", "home.category.fresh": "تازه", "home.category.floral": "ګل لرونکې", "home.category.woody": "د لرګي بوی", "home.category.oud": "عود",
+    "home.orderEyebrow": "امر څنګه کېږي", "home.orderTitle": "ساده خبرې، پېچلی چک‌اوت نه", "home.orderIntro": "دلته یو بوتل وټاکئ، بیا خپل انتخاب په واټس‌اپ کې برانډ ته ولېږئ. شته والی، بیه او رسونه به له تاسو سره مستقیمه تایید شي.", "home.orderStepOne": "یو بوتل وټاکئ", "home.orderStepOneBody": "د یادښتونو او جوړښت د لیدلو لپاره جزیات خلاص کړئ.", "home.orderStepTwo": "خپل انتخاب جوړ کړئ", "home.orderStepTwoBody": "د کتلو پر مهال یو یا څو بوتلونه کارټ ته ورزیات کړئ.", "home.orderStepThree": "په واټس‌اپ کې یې ولېږئ", "home.orderStepThreeBody": "موږ به اوسنی بیچ، بیه او رسونه تایید کړو.", "home.orderCta": "په واټس‌اپ کې پیل کړئ",
+    "contact.whatsappLabel": "واټس‌اپ", "contact.response": "هغه خوشبويي، خپل ښار او خپله پوښتنه راولېږئ. موږ به اوسنی بیچ، بیه او رسونه مستقیمه تایید کړو.", "contact.call": "دې شمېرې ته زنګ ووهئ",
     "language.label": "ژبه",
     "nav.home": "کور", "nav.bottles": "عطرونه", "nav.packaging": "بسته بندي", "nav.contact": "اړیکه", "nav.reviews": "نظرونه", "nav.shop": "په واټس‌اپ کې پیرود", "nav.cart": "کارټ", "nav.menu": "مینو", "nav.close": "بندول",
     "footer.tagline": "خوشبويي، په طبیعت کې ساتل شوې.", "footer.contact": "اړیکه", "footer.notes": "د پیرودونکو نظرونه", "footer.shop": "په واټس‌اپ کې پیرود", "footer.privacy": "محرمیت", "footer.terms": "شرایط",
@@ -142,6 +173,9 @@ const overrides = {
     "legal.back": "هیون او نیچر ته بېرته", "privacy.eyebrow": "محرمیت", "privacy.title": "د ډیزاین له مخې ارام", "privacy.receiveTitle": "موږ څه ترلاسه کوو", "privacy.imagesTitle": "انځورونه او شننه", "privacy.questionsTitle": "پوښتنې", "terms.eyebrow": "شرایط", "terms.title": "یو روښانه لومړی نظر", "terms.productTitle": "د محصول معلومات", "terms.contentTitle": "انځورونه او منځپانګه", "terms.updatesTitle": "تازه کول", "product.back": "کټلاګ ته بېرته", "product.available": "شته", "product.preview": "د کټلاګ مخکتنه", "product.size": "اندازه:", "product.price": "بیه:", "notFound.title": "دا پاڼه بل ځای ته تللې ده.", "notFound.return": "هیون او نیچر ته بېرته"
   },
   pa: {
+    "home.categoryEyebrow": "خوشبو دے انداز نال ویکھو", "home.categoryAll": "ساریاں خوشبوواں", "home.categoryFresh": "تازہ", "home.categoryFloral": "پھلاں والی", "home.categoryWoody": "لکڑی والی", "home.categoryOud": "عود", "home.categoryStatusAll": "سارے چھ نمونے وکھائے جا رہے نیں۔", "home.categoryStatusFiltered": "ایس انداز وچ {count} نمونے وکھائے جا رہے نیں۔", "home.category.fresh": "تازہ", "home.category.floral": "پھلاں والی", "home.category.woody": "لکڑی والی", "home.category.oud": "عود",
+    "home.orderEyebrow": "آرڈر کیویں ہوندا اے", "home.orderTitle": "سادی گل بات، الجھیا چیک آؤٹ نہیں", "home.orderIntro": "ایتھے بوتل چنو، فیر اپنا انتخاب واٹس ایپ اُتے برانڈ نوں بھیجو۔ دستیابی، قیمت تے ترسیل تہاڈے نال براہِ راست پکی ہووے گی۔", "home.orderStepOne": "بوتل چنو", "home.orderStepOneBody": "نوٹس تے کمپوزیشن ویکھن لئی تفصیل کھولو۔", "home.orderStepTwo": "اپنا انتخاب بناؤ", "home.orderStepTwoBody": "براؤز کردیاں اک یا ودھ بوتلاں کارٹ وچ شامل کرو۔", "home.orderStepThree": "واٹس ایپ اُتے بھیجو", "home.orderStepThreeBody": "اسیں موجودہ بیچ، قیمت تے ترسیل دی تصدیق کراں گے۔", "home.orderCta": "واٹس ایپ اُتے شروع کرو",
+    "contact.whatsappLabel": "واٹس ایپ", "contact.response": "جس خوشبو بارے سوچ رہے او، اپنا شہر تے سوال بھیجو۔ اسیں موجودہ بیچ، قیمت تے ترسیل دی براہِ راست تصدیق کراں گے۔", "contact.call": "ایس نمبر اُتے کال کرو",
     "language.label": "زبان",
     "nav.home": "گھر", "nav.bottles": "خوشبواں", "nav.packaging": "پیکجنگ", "nav.contact": "رابطہ", "nav.reviews": "ریویوز", "nav.shop": "واٹس ایپ اُتے خرید", "nav.cart": "کارٹ", "nav.menu": "مینو", "nav.close": "بند",
     "footer.tagline": "خوشبو، قدرت وچ محفوظ۔", "footer.contact": "رابطہ", "footer.notes": "گاہکاں دے تاثرات", "footer.shop": "واٹس ایپ اُتے خرید", "footer.privacy": "رازداری", "footer.terms": "شرائط",
@@ -151,6 +185,9 @@ const overrides = {
     "legal.back": "ہیون اینڈ نیچر اُتے واپس", "privacy.eyebrow": "رازداری", "privacy.title": "ڈیزائن وچ سکون", "privacy.receiveTitle": "سانوں کی ملدا اے", "privacy.imagesTitle": "تصویراں تے تجزیہ", "privacy.questionsTitle": "سوال", "terms.eyebrow": "شرائط", "terms.title": "صاف پہلا تعارف", "terms.productTitle": "مصنوعات دی معلومات", "terms.contentTitle": "تصویراں تے مواد", "terms.updatesTitle": "تازہ کاریاں", "product.back": "کیٹلاگ اُتے واپس", "product.available": "دستیاب", "product.preview": "کیٹلاگ دا پیش منظر", "product.size": "سائز:", "product.price": "قیمت:", "notFound.title": "ایہ صفحہ ہور جگہ منتقل ہو گیا اے۔", "notFound.return": "ہیون اینڈ نیچر اُتے واپس"
   },
   sd: {
+    "home.categoryEyebrow": "خوشبوءَ جي انداز سان ڏسو", "home.categoryAll": "سڀ خوشبوئون", "home.categoryFresh": "تازيون", "home.categoryFloral": "گلن واريون", "home.categoryWoody": "ڪاٺ واريون", "home.categoryOud": "عود", "home.categoryStatusAll": "سڀ ڇهه نمونا ڏيکاريا پيا وڃن.", "home.categoryStatusFiltered": "هن انداز ۾ {count} نمونا ڏيکاريا پيا وڃن.", "home.category.fresh": "تازيون", "home.category.floral": "گلن واريون", "home.category.woody": "ڪاٺ واريون", "home.category.oud": "عود",
+    "home.orderEyebrow": "آرڊر ڪيئن ٿئي ٿو", "home.orderTitle": "سادي ڳالهه ٻولهه، پيچيده چيڪ آئوٽ نه", "home.orderIntro": "هتي بوتل چونڊيو، پوءِ پنهنجو انتخاب واٽس ايپ تي برانڊ ڏانهن موڪليو. دستيابي، قيمت ۽ ترسيل اوهان سان سڌي طرح پڪي ٿيندي.", "home.orderStepOne": "بوتل چونڊيو", "home.orderStepOneBody": "نوٽس ۽ ڪمپوزيشن ڏسڻ لاءِ تفصيل کوليو.", "home.orderStepTwo": "پنهنجو انتخاب ٺاهيو", "home.orderStepTwoBody": "ڏسندي هڪ يا وڌيڪ بوتلون ڪارٽ ۾ شامل ڪريو.", "home.orderStepThree": "واٽس ايپ تي موڪليو", "home.orderStepThreeBody": "اسان موجوده بيچ، قيمت ۽ ترسيل جي تصديق ڪنداسين.", "home.orderCta": "واٽس ايپ تي شروع ڪريو",
+    "contact.whatsappLabel": "واٽس ايپ", "contact.response": "جنهن خوشبوءَ بابت سوچي رهيا آهيو، پنهنجو شهر ۽ سوال موڪليو. اسان موجوده بيچ، قيمت ۽ ترسيل جي سڌي تصديق ڪنداسين.", "contact.call": "هن نمبر تي ڪال ڪريو",
     "language.label": "ٻولي",
     "nav.home": "گهر", "nav.bottles": "خوشبوئون", "nav.packaging": "پيڪنگ", "nav.contact": "رابطو", "nav.reviews": "رايا", "nav.shop": "واٽس ايپ تي خريد", "nav.cart": "ڪارٽ", "nav.menu": "مينيو", "nav.close": "بند ڪريو",
     "footer.tagline": "خوشبو، فطرت ۾ محفوظ.", "footer.contact": "رابطو", "footer.notes": "گراهڪن جا رايا", "footer.shop": "واٽس ايپ تي خريد", "footer.privacy": "رازداري", "footer.terms": "شرطون",

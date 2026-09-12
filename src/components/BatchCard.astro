@@ -9,7 +9,7 @@ interface Props {
 const { batch } = Astro.props;
 ---
 
-<li class="catalogue-item" data-product-card data-product-slug={batch.slug}>
+<li class="catalogue-item" data-product-card data-product-slug={batch.slug} data-category={batch.category}>
   <button class="catalogue-main" type="button" data-product-details={batch.slug} aria-label={`View details for ${batch.name}`}>
     <figure class="catalogue-image">
       {batch.image ? (
@@ -21,6 +21,7 @@ const { batch } = Astro.props;
     <div class="catalogue-caption">
       <h3>{batch.name}</h3>
       {batch.collection && <p class="batch-collection">{batch.collection}</p>}
+      <p class="batch-category" data-i18n={`home.category.${batch.category}`}>{batch.category}</p>
       <p class="catalogue-size">{batch.size || "Details to be confirmed"}</p>
     </div>
   </button>
