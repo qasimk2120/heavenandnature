@@ -1,0 +1,64 @@
+---
+import { whatsappUrl, withBase } from "../data/site";
+
+interface Props {
+  showCart?: boolean;
+}
+
+const { showCart = false } = Astro.props;
+---
+
+<header class="site-header" data-site-header>
+  <a class="brand-lockup" href={withBase("/")} aria-label="Heaven and Nature home">
+    <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
+    <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+  </a>
+
+  <button class="menu-trigger" type="button" aria-controls="site-navigation" aria-expanded="false" data-menu-trigger>
+    <span data-menu-label>Menu</span>
+    <span class="menu-mark" aria-hidden="true"><i></i><i></i></span>
+  </button>
+
+  <nav class="site-nav" id="site-navigation" aria-label="Main navigation" data-site-nav>
+    <a href={withBase("/")}>Home</a>
+    <a href={withBase("/#collection")}>The bottles</a>
+    <a href={withBase("/#story")}>Packaging</a>
+    <a href={withBase("/contact/")}>Contact</a>
+    <a href={withBase("/testimonials/")}>Reviews</a>
+    <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
+    {showCart && <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false">Cart <span data-cart-count>0</span></button>}
+  </nav>
+</header>
+
+<script>
+  const headers = document.querySelectorAll<HTMLElement>("[data-site-header]");
+
+  headers.forEach((header) => {
+    const trigger = header.querySelector<HTMLButtonElement>("[data-menu-trigger]");
+    const label = header.querySelector<HTMLElement>("[data-menu-label]");
+    const nav = header.querySelector<HTMLElement>("[data-site-nav]");
+    if (!trigger || !nav) return;
+
+    const closeMenu = (returnFocus = false) => {
+      nav.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+      if (label) label.textContent = "Menu";
+      if (returnFocus) trigger.focus();
+    };
+
+    trigger.addEventListener("click", () => {
+      const opening = trigger.getAttribute("aria-expanded") !== "true";
+      nav.classList.toggle("is-open", opening);
+      trigger.setAttribute("aria-expanded", String(opening));
+      if (label) label.textContent = opening ? "Close" : "Menu";
+    });
+
+    nav.addEventListener("click", (event) => {
+      if ((event.target as Element).closest("a")) closeMenu();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.classList.contains("is-open")) closeMenu(true);
+    });
+  });
+</script>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { absoluteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../../data/site";
 
@@ -27,19 +28,7 @@ const contactSchema = {
 >
   <StructuredData data={contactSchema} />
 
-  <header class="site-header">
-    <a class="brand-lockup" href={withBase("/")} aria-label="Heaven and Nature home">
-      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
-      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
-    </a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href={withBase("/")}>Home</a>
-      <a href={withBase("/#collection")}>The bottles</a>
-      <a href={withBase("/#story")}>Packaging</a>
-      <a href={withBase("/testimonials/")}>Reviews</a>
-      <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
-    </nav>
-  </header>
+  <SiteHeader />
 
   <main id="main" class="contact-page">
     <div class="contact-heading">
