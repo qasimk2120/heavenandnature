@@ -49,7 +49,11 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
           <a class="text-link" href="#collection">See the bottles</a>
           <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
         </div>
-        <p class="delivery-note"><span>Delivery</span> Throughout Pakistan</p>
+        <p class="delivery-note">
+          <span>Nationwide delivery</span>
+          <strong>Throughout Pakistan</strong>
+          <small>Ask on WhatsApp for the current batch and delivery details.</small>
+        </p>
       </div>
     </section>
 
@@ -59,6 +63,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <h2 id="collection-title">Six bottle references</h2>
         <p>These six bottles are shown as a visual reference from the supplied H&amp;N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.</p>
       </div>
+      <p class="collection-delivery"><span>Wherever you are</span> H&amp;N Scents delivers throughout Pakistan.</p>
       {batches.length ? (
         <ul class="catalogue-grid">
           {batches.map((batch) => <BatchCard batch={batch} />)}

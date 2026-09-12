@@ -166,14 +166,16 @@ h1 { font-size: clamp(3.2rem, 6.5vw, 6.3rem); line-height: .9; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 
 .delivery-note {
-  display: flex;
-  gap: .75rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .2rem 1rem;
   align-items: baseline;
   margin: 2.75rem 0 0;
-  padding-top: .85rem;
+  padding: 1rem 0 0 1rem;
   border-top: 1px solid var(--line);
+  border-left: 2px solid var(--cedar);
   color: var(--ink);
-  font-size: .84rem;
+  font-size: .9rem;
 }
 
 .delivery-note span {
@@ -182,6 +184,20 @@ h1 { font-size: clamp(3.2rem, 6.5vw, 6.3rem); line-height: .9; }
   font-size: .62rem;
   letter-spacing: .1em;
   text-transform: uppercase;
+}
+
+.delivery-note strong {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.delivery-note small {
+  grid-column: 2;
+  margin-top: .25rem;
+  color: var(--muted);
+  font-size: .78rem;
 }
 
 .text-link {
@@ -214,6 +230,28 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
   margin: .35rem 0 0;
   color: var(--muted);
   font-size: .95rem;
+}
+
+.collection-delivery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: baseline;
+  margin: 0 0 2.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  line-height: 1;
+}
+
+.collection-delivery span {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .62rem;
+  letter-spacing: .1em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
 .catalogue-grid {
@@ -530,6 +568,8 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   .hero-still-life img { height: min(72vh, 620px); }
 
   .hero-copy { max-width: 32rem; }
+
+  .collection-delivery { margin-bottom: 2rem; }
 
   .section-heading { grid-template-columns: 1fr; gap: .75rem; }
 
