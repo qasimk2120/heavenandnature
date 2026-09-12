@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BatchCard from "../components/BatchCard.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { batches } from "../data/batches";
-import { absoluteUrl, configuredSiteUrl, site, whatsappUrl, withBase } from "../data/site";
+import { absoluteUrl, configuredSiteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../data/site";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -17,6 +17,8 @@ const organizationSchema = {
     name: site.location
   }
 };
+
+const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
 ---
 
 <BaseLayout>
@@ -30,6 +32,7 @@ const organizationSchema = {
       <a href="#collection">The bottles</a>
       <a href="#story">Packaging</a>
       <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
+      <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false">Cart <span data-cart-count>0</span></button>
     </nav>
   </header>
 
@@ -77,6 +80,45 @@ const organizationSchema = {
     </section>
   </main>
 
+  <dialog class="product-dialog" data-product-dialog aria-labelledby="product-dialog-title">
+    <div class="product-dialog-inner">
+      <button class="dialog-close" type="button" data-dialog-close aria-label="Close product details">Close</button>
+      <div class="product-dialog-grid">
+        <figure class="product-dialog-image"><img data-dialog-image src="" alt="" /></figure>
+        <div class="product-dialog-copy">
+          <p class="eyebrow">Bottle details</p>
+          <h2 id="product-dialog-title" data-dialog-name></h2>
+          <p data-dialog-description></p>
+          <dl class="product-facts">
+            <div><dt>Size</dt><dd data-dialog-size></dd></div>
+            <div><dt>Scent profile</dt><dd data-dialog-notes></dd></div>
+            <div><dt>Composition</dt><dd data-dialog-composition></dd></div>
+          </dl>
+          <button class="dialog-add" type="button" data-dialog-add>Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <aside class="cart-panel" id="cart-panel" data-cart-panel data-whatsapp-base={whatsappBaseUrl} aria-hidden="true" aria-labelledby="cart-title">
+    <div class="cart-panel-head">
+      <div>
+        <p class="eyebrow">Your selection</p>
+        <h2 id="cart-title">Cart</h2>
+      </div>
+      <button class="dialog-close" type="button" data-cart-close aria-label="Close cart">Close</button>
+    </div>
+    <div class="cart-items" data-cart-items>
+      <p class="cart-empty">Your cart is empty. Add a bottle to begin.</p>
+    </div>
+    <div class="cart-panel-foot">
+      <p class="cart-note">No prices are shown yet. WhatsApp is used to confirm the current batch, cost and delivery.</p>
+      <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Send cart to WhatsApp <span aria-hidden="true">↗</span></a>
+      <button class="cart-clear" type="button" data-cart-clear>Clear cart</button>
+    </div>
+  </aside>
+  <button class="cart-scrim" type="button" data-cart-close aria-label="Close cart"></button>
+
   <footer>
     <a class="brand-lockup" href="#top">
       <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
@@ -87,3 +129,140 @@ const organizationSchema = {
     <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
   </footer>
 </BaseLayout>
+
+<script type="application/json" id="catalogue-data" is:inline set:html={catalogueJson}></script>
+
+<script>
+  type CartLine = { slug: string; quantity: number };
+  type Product = {
+    slug: string;
+    name: string;
+    image?: string;
+    imageAlt?: string;
+    description: string;
+    notes: string[];
+    composition: string;
+    size?: string;
+  };
+
+  const dataNode = document.querySelector<HTMLScriptElement>("#catalogue-data");
+  const products = (dataNode ? JSON.parse(dataNode.textContent || "[]") : []) as Product[];
+  const productBySlug = new Map<string, Product>(products.map((product) => [product.slug, product]));
+  const storageKey = "heaven-and-nature-cart";
+  const whatsappBase = document.querySelector<HTMLElement>("[data-whatsapp-base]")?.dataset.whatsappBase || "https://wa.me/923008322313";
+  let cart: CartLine[] = [];
+
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey) || "[]") as CartLine[];
+    cart = Array.isArray(stored) ? stored.filter((line: CartLine) => productBySlug.has(line.slug) && line.quantity > 0) : [];
+  } catch {
+    cart = [];
+  }
+
+  const countNodes = [...document.querySelectorAll<HTMLElement>("[data-cart-count]")];
+  const panel = document.querySelector<HTMLElement>("[data-cart-panel]");
+  const scrim = document.querySelector<HTMLElement>("[data-cart-close].cart-scrim");
+  const cartItems = document.querySelector<HTMLElement>("[data-cart-items]");
+  const cartWhatsapp = document.querySelector<HTMLAnchorElement>("[data-cart-whatsapp]");
+  const dialog = document.querySelector<HTMLDialogElement>("[data-product-dialog]");
+  let dialogSlug = "";
+
+  const saveCart = () => localStorage.setItem(storageKey, JSON.stringify(cart));
+  const cartCount = () => cart.reduce((total, line) => total + line.quantity, 0);
+  const messageForCart = () => {
+    const lines = cart.map((line) => {
+      const product = productBySlug.get(line.slug);
+      return product ? `• ${product.name} × ${line.quantity}` : "";
+    }).filter(Boolean);
+    return lines.length
+      ? `Hi H&N Scents, I would like to ask about:\n${lines.join("\n")}\n\nPlease confirm the current cost and delivery.`
+      : "Hi H&N Scents, I would like to ask about the collection.";
+  };
+
+  const escapeHtml = (value: string) => value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  }[character] || character));
+
+  const renderCart = () => {
+    const count = cartCount();
+    countNodes.forEach((node) => { node.textContent = String(count); });
+    if (cartWhatsapp) cartWhatsapp.href = `${whatsappBase}?text=${encodeURIComponent(messageForCart())}`;
+    if (!cartItems) return;
+    if (!cart.length) {
+      cartItems.innerHTML = '<p class="cart-empty">Your cart is empty. Add a bottle to begin.</p>';
+      return;
+    }
+    cartItems.innerHTML = cart.map((line) => {
+      const product = productBySlug.get(line.slug);
+      return product ? `<div class="cart-line" data-cart-line="${escapeHtml(product.slug)}">
+        <div><strong>${escapeHtml(product.name)}</strong><span>${escapeHtml(product.size || "Details to be confirmed")}</span></div>
+        <div class="cart-quantity"><button type="button" data-cart-decrease="${escapeHtml(product.slug)}" aria-label="Remove one ${escapeHtml(product.name)}">−</button><span>${line.quantity}</span><button type="button" data-cart-increase="${escapeHtml(product.slug)}" aria-label="Add one ${escapeHtml(product.name)}">＋</button></div>
+      </div>` : "";
+    }).join("");
+  };
+
+  const setCartOpen = (open: boolean) => {
+    if (!panel || !scrim) return;
+    panel.classList.toggle("is-open", open);
+    panel.setAttribute("aria-hidden", String(!open));
+    scrim.classList.toggle("is-visible", open);
+    document.querySelectorAll<HTMLElement>("[data-cart-open]").forEach((button) => button.setAttribute("aria-expanded", String(open)));
+    if (open) panel.querySelector<HTMLButtonElement>("[data-cart-close]")?.focus();
+  };
+
+  const addToCart = (slug: string) => {
+    const line = cart.find((item) => item.slug === slug);
+    if (line) line.quantity += 1;
+    else cart.push({ slug, quantity: 1 });
+    saveCart();
+    renderCart();
+    setCartOpen(true);
+  };
+
+  const updateQuantity = (slug: string, delta: number) => {
+    const line = cart.find((item) => item.slug === slug);
+    if (!line) return;
+    line.quantity += delta;
+    cart = cart.filter((item) => item.quantity > 0);
+    saveCart();
+    renderCart();
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-cart-open]").forEach((button) => button.addEventListener("click", () => setCartOpen(true)));
+  document.querySelectorAll<HTMLElement>("[data-cart-close]").forEach((button) => button.addEventListener("click", () => setCartOpen(false)));
+  document.querySelector<HTMLElement>("[data-cart-clear]")?.addEventListener("click", () => { cart = []; saveCart(); renderCart(); });
+  document.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    const addButton = target.closest<HTMLElement>("[data-add-to-cart]");
+    if (addButton) addToCart(addButton.dataset.addToCart || "");
+    const increase = target.closest<HTMLElement>("[data-cart-increase]");
+    if (increase) updateQuantity(increase.dataset.cartIncrease || "", 1);
+    const decrease = target.closest<HTMLElement>("[data-cart-decrease]");
+    if (decrease) updateQuantity(decrease.dataset.cartDecrease || "", -1);
+  });
+
+  const openDetails = (slug: string) => {
+    const product = productBySlug.get(slug);
+    if (!product || !dialog) return;
+    dialogSlug = slug;
+    const image = dialog.querySelector<HTMLImageElement>("[data-dialog-image]");
+    if (image) { image.src = product.image || ""; image.alt = product.imageAlt || product.name; }
+    dialog.querySelector<HTMLElement>("[data-dialog-name]")!.textContent = product.name;
+    dialog.querySelector<HTMLElement>("[data-dialog-description]")!.textContent = product.description;
+    dialog.querySelector<HTMLElement>("[data-dialog-size]")!.textContent = product.size || "Details to be confirmed";
+    dialog.querySelector<HTMLElement>("[data-dialog-notes]")!.textContent = product.notes.join(" · ");
+    dialog.querySelector<HTMLElement>("[data-dialog-composition]")!.textContent = product.composition;
+    dialog.showModal();
+  };
+
+  document.querySelectorAll<HTMLElement>("[data-product-details]").forEach((button) => button.addEventListener("click", () => openDetails(button.dataset.productDetails || "")));
+  document.querySelector<HTMLElement>("[data-dialog-close]")?.addEventListener("click", () => dialog?.close());
+  document.querySelector<HTMLElement>("[data-dialog-add]")?.addEventListener("click", () => { addToCart(dialogSlug); dialog?.close(); });
+  dialog?.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+
+  renderCart();
+</script>

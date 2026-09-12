@@ -7,6 +7,8 @@ export type Batch = {
   collection?: string;
   shortDescription: string;
   description: string;
+  notes: string[];
+  composition: string;
   size?: string;
   price?: number;
   currency?: "PKR";
@@ -26,6 +28,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "A stone-grey label, clear glass and a warm wooden cap.",
     description: "Ganymede 289 from the H&N Scents product photography collection.",
+    notes: ["Mineral woods", "Saffron", "Suede"],
+    composition: "An inspired mineral-woody profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/ganymede-289.jpg",
     imageAlt: "Ganymede 289 perfume bottle in an open cream presentation box.",
@@ -37,6 +41,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "A rose-toned bottle presented against soft petals and linen.",
     description: "Les Sables Roses 237 from the H&N Scents product photography collection.",
+    notes: ["Rose", "Amber", "Soft spice"],
+    composition: "An inspired rose-amber profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/les-sables-roses-237.jpg",
     imageAlt: "Les Sables Roses 237 perfume bottle in an open cream presentation box with flowers.",
@@ -48,6 +54,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "Amber glass and a black label grounded by a deep walnut cap.",
     description: "Layton 263 from the H&N Scents product photography collection.",
+    notes: ["Apple", "Lavender", "Vanilla"],
+    composition: "An inspired aromatic-vanilla profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/layton-263.jpg",
     imageAlt: "Layton 263 perfume bottle in an open cream presentation box.",
@@ -59,6 +67,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "A quiet silver-grey label set into transparent glass.",
     description: "Gris Dior 258 from the H&N Scents product photography collection.",
+    notes: ["Rose", "Moss", "Amber"],
+    composition: "An inspired chypre-rose profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/gris-dior-258.jpg",
     imageAlt: "Gris Dior 258 perfume bottle in an open cream presentation box.",
@@ -70,6 +80,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "A plum label and sculpted wood cap give the bottle its night-time weight.",
     description: "Oud Satin Mood 269 from the H&N Scents product photography collection.",
+    notes: ["Violet", "Rose", "Oud"],
+    composition: "An inspired floral-oud profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/oud-satin-mood-269.jpg",
     imageAlt: "Oud Satin Mood 269 perfume bottle in an open cream presentation box.",
@@ -81,6 +93,8 @@ export const batches: Batch[] = [
     status: "catalogue",
     shortDescription: "An airy blue label set against a pale, botanical presentation.",
     description: "Pacific Chill 258 from the H&N Scents product photography collection.",
+    notes: ["Citrus", "Blackcurrant", "Basil"],
+    composition: "An inspired fresh-citrus profile. Final formula details are confirmed by the brand on request.",
     size: "50ml",
     image: "/batches/pacific-chill-258.jpg",
     imageAlt: "Pacific Chill 258 perfume bottle in an open cream presentation box.",
