@@ -21,7 +21,6 @@ const { batch } = Astro.props;
     <div class="catalogue-caption">
       <h3>{batch.name}</h3>
       {batch.collection && <p class="batch-collection">{batch.collection}</p>}
-      <p class="batch-notes">{batch.shortDescription}</p>
       <p class="catalogue-size">{batch.size || "Details to be confirmed"}</p>
     </div>
   </button>
