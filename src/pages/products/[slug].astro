@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { batches } from "../../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, withBase } from "../../data/site";
@@ -31,19 +32,20 @@ const productSchema = batch.price !== undefined && batch.image && configuredSite
 ---
 
 <BaseLayout title={`${batch.name} | ${site.name}`} description={batch.description} path={`/products/${batch.slug}/`} image={batch.image}>
+  <SiteHeader />
   {productSchema && <StructuredData data={productSchema} />}
   <main id="main" class="product-page">
-    <a class="product-back text-link" href={withBase("/")}>Back to collection</a>
+    <a class="product-back text-link" href={withBase("/")}><span data-i18n="product.back">Back to collection</span></a>
     <article class="product-detail">
       <div class="product-image">
         {batch.image ? <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} /> : <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>}
       </div>
       <div class="product-copy">
-        <p class="eyebrow">{batch.status === "available" ? "Available" : "Collection preview"}</p>
+        <p class="eyebrow" data-i18n={batch.status === "available" ? "product.available" : "product.preview"}>{batch.status === "available" ? "Available" : "Collection preview"}</p>
         <h1>{batch.name}</h1>
         <p>{batch.description}</p>
-        {batch.size && <p><strong>Size:</strong> {batch.size}</p>}
-        {batch.price !== undefined && <p><strong>Price:</strong> PKR {batch.price.toLocaleString("en-PK")}</p>}
+        {batch.size && <p><strong data-i18n="product.size">Size:</strong> {batch.size}</p>}
+        {batch.price !== undefined && <p><strong data-i18n="product.price">Price:</strong> PKR {batch.price.toLocaleString("en-PK")}</p>}
       </div>
     </article>
   </main>

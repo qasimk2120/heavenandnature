@@ -63,28 +63,28 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" fetchpriority="high" decoding="async" />
       </figure>
       <div class="hero-copy">
-        <p class="eyebrow">Heaven &amp; Nature · Pakistan</p>
+        <p class="eyebrow" data-i18n="home.eyebrow">Heaven &amp; Nature · Pakistan</p>
         <h1 id="hero-title">H&amp;N Scents</h1>
-        <p class="hero-intro">A photographic catalogue of the bottles, labels and presentation pieces currently shared by the brand.</p>
+        <p class="hero-intro" data-i18n="home.intro">A photographic catalogue of the bottles, labels and presentation pieces currently shared by the brand.</p>
         <div class="hero-actions">
-          <a class="text-link" href="#collection">See the bottles</a>
-          <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
+          <a class="text-link" href="#collection"><span data-i18n="home.see">See the bottles</span></a>
+          <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.shop">Shop on WhatsApp</span></a>
         </div>
         <p class="delivery-note">
-          <span>Nationwide delivery</span>
-          <strong>Throughout Pakistan</strong>
-          <small>Ask on WhatsApp for the current batch and delivery details.</small>
+          <span data-i18n="home.deliveryLabel">Nationwide delivery</span>
+          <strong data-i18n="home.deliveryTitle">Throughout Pakistan</strong>
+          <small data-i18n="home.deliveryNote">Ask on WhatsApp for the current batch and delivery details.</small>
         </p>
       </div>
     </section>
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-heading">
-        <p class="eyebrow">Bottle catalogue</p>
-        <h2 id="collection-title">Six bottle references</h2>
-        <p>These six bottles are shown as a visual reference from the supplied H&amp;N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.</p>
+        <p class="eyebrow" data-i18n="home.catalogueEyebrow">Bottle catalogue</p>
+        <h2 id="collection-title" data-i18n="home.collectionTitle">Six bottle references</h2>
+        <p data-i18n="home.collectionIntro">These six bottles are shown as a visual reference from the supplied H&amp;N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.</p>
       </div>
-      <p class="collection-delivery"><span>Wherever you are</span> H&amp;N Scents delivers throughout Pakistan.</p>
+      <p class="collection-delivery"><span data-i18n="home.collectionDeliveryLabel">Wherever you are</span> <span data-i18n="home.collectionDelivery">H&amp;N Scents delivers throughout Pakistan.</span></p>
       {batches.length ? (
         <ul class="catalogue-grid">
           {batches.map((batch) => <BatchCard batch={batch} />)}
@@ -99,29 +99,29 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <img src={withBase("/batches/presentation-box.jpg")} alt="An open H&N Scents presentation box beside its closed floral box." width="1200" height="1200" loading="lazy" decoding="async" />
       </figure>
       <div class="craft-copy">
-        <p class="eyebrow">Packaging details</p>
-        <h2 id="craft-title">The bottle, clearly</h2>
-        <p>Clear glass keeps the liquid visible. The wooden cap adds warmth. The printed label gives each bottle its own character.</p>
-        <p class="quiet">There is no online checkout here. Use WhatsApp to ask about a bottle, confirm the current batch and arrange an order with the brand.</p>
+        <p class="eyebrow" data-i18n="home.packagingEyebrow">Packaging details</p>
+        <h2 id="craft-title" data-i18n="home.packagingTitle">The bottle, clearly</h2>
+        <p data-i18n="home.packagingText">Clear glass keeps the liquid visible. The wooden cap adds warmth. The printed label gives each bottle its own character.</p>
+        <p class="quiet" data-i18n="home.packagingQuiet">There is no online checkout here. Use WhatsApp to ask about a bottle, confirm the current batch and arrange an order with the brand.</p>
       </div>
     </section>
   </main>
 
   <dialog class="product-dialog" data-product-dialog aria-labelledby="product-dialog-title">
     <div class="product-dialog-inner">
-      <button class="dialog-close" type="button" data-dialog-close aria-label="Close product details">Close</button>
+      <button class="dialog-close" type="button" data-dialog-close aria-label="Close product details" data-i18n-aria-label="home.dialogClose"><span data-i18n="home.dialogClose">Close</span></button>
       <div class="product-dialog-grid">
         <figure class="product-dialog-image"><img data-dialog-image src="" alt="" /></figure>
         <div class="product-dialog-copy">
-          <p class="eyebrow">Bottle details</p>
+          <p class="eyebrow" data-i18n="home.detailsEyebrow">Bottle details</p>
           <h2 id="product-dialog-title" data-dialog-name></h2>
           <p data-dialog-description></p>
           <dl class="product-facts">
-            <div><dt>Size</dt><dd data-dialog-size></dd></div>
-            <div><dt>Scent profile</dt><dd data-dialog-notes></dd></div>
-            <div><dt>Composition</dt><dd data-dialog-composition></dd></div>
+            <div><dt data-i18n="home.size">Size</dt><dd data-dialog-size></dd></div>
+            <div><dt data-i18n="home.profile">Scent profile</dt><dd data-dialog-notes></dd></div>
+            <div><dt data-i18n="home.composition">Composition</dt><dd data-dialog-composition></dd></div>
           </dl>
-          <button class="dialog-add" type="button" data-dialog-add>Add to cart</button>
+          <button class="dialog-add" type="button" data-dialog-add><span data-i18n="home.add">Add to cart</span></button>
         </div>
       </div>
     </div>
@@ -130,18 +130,18 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   <aside class="cart-panel" id="cart-panel" data-cart-panel data-whatsapp-base={whatsappBaseUrl} aria-hidden="true" aria-labelledby="cart-title">
     <div class="cart-panel-head">
       <div>
-        <p class="eyebrow">Your selection</p>
-        <h2 id="cart-title">Cart</h2>
+        <p class="eyebrow" data-i18n="home.selection">Your selection</p>
+        <h2 id="cart-title" data-i18n="home.cartTitle">Cart</h2>
       </div>
-      <button class="dialog-close" type="button" data-cart-close aria-label="Close cart">Close</button>
+      <button class="dialog-close" type="button" data-cart-close aria-label="Close cart" data-i18n-aria-label="home.dialogClose"><span data-i18n="home.dialogClose">Close</span></button>
     </div>
     <div class="cart-items" data-cart-items>
-      <p class="cart-empty">Your cart is empty. Add a bottle to begin.</p>
+      <p class="cart-empty" data-i18n="home.cartEmpty">Your cart is empty. Add a bottle to begin.</p>
     </div>
     <div class="cart-panel-foot">
-      <p class="cart-note">No prices are shown yet. WhatsApp is used to confirm the current batch, cost and delivery.</p>
-      <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Send cart to WhatsApp <span aria-hidden="true">↗</span></a>
-      <button class="cart-clear" type="button" data-cart-clear>Clear cart</button>
+      <p class="cart-note" data-i18n="home.cartNote">No prices are shown yet. WhatsApp is used to confirm the current batch, cost and delivery.</p>
+      <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.send">Send cart to WhatsApp</span> <span aria-hidden="true">↗</span></a>
+      <button class="cart-clear" type="button" data-cart-clear><span data-i18n="home.clear">Clear cart</span></button>
     </div>
   </aside>
   <button class="cart-scrim" type="button" data-cart-close aria-label="Close cart"></button>
@@ -151,8 +151,8 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
-    <p>Fragrance, held in nature.</p>
-    <nav aria-label="Footer links"><a href={withBase("/contact/")}>Contact</a><a href={withBase("/testimonials/")}>Customer notes</a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
+    <p data-i18n="footer.tagline">Fragrance, held in nature.</p>
+    <nav aria-label="Footer links"><a href={withBase("/contact/")}><span data-i18n="footer.contact">Contact</span></a><a href={withBase("/testimonials/")}><span data-i18n="footer.notes">Customer notes</span></a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="footer.shop">Shop on WhatsApp</span></a><a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a><a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a></nav>
     <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
   </footer>
 </BaseLayout>
@@ -178,6 +178,10 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   const storageKey = "heaven-and-nature-cart";
   const whatsappBase = document.querySelector<HTMLElement>("[data-whatsapp-base]")?.dataset.whatsappBase || "https://wa.me/923008322313";
   let cart: CartLine[] = [];
+  const localized = (key: string, fallback: string) => {
+    const current = (window as Window & { hnI18n?: { get: (key: string, fallback?: string) => string } }).hnI18n;
+    return current?.get(key, fallback) || fallback;
+  };
 
   try {
     const stored = JSON.parse(localStorage.getItem(storageKey) || "[]") as CartLine[];
@@ -220,13 +224,13 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     if (cartWhatsapp) cartWhatsapp.href = `${whatsappBase}?text=${encodeURIComponent(messageForCart())}`;
     if (!cartItems) return;
     if (!cart.length) {
-      cartItems.innerHTML = '<p class="cart-empty">Your cart is empty. Add a bottle to begin.</p>';
+      cartItems.innerHTML = `<p class="cart-empty">${localized("home.cartEmpty", "Your cart is empty. Add a bottle to begin.")}</p>`;
       return;
     }
     cartItems.innerHTML = cart.map((line) => {
       const product = productBySlug.get(line.slug);
       return product ? `<div class="cart-line" data-cart-line="${escapeHtml(product.slug)}">
-        <div><strong>${escapeHtml(product.name)}</strong><span>${escapeHtml(product.size || "Details to be confirmed")}</span></div>
+        <div><strong>${escapeHtml(product.name)}</strong><span>${escapeHtml(product.size || localized("home.detailsConfirm", "Details to be confirmed"))}</span></div>
         <div class="cart-quantity"><button type="button" data-cart-decrease="${escapeHtml(product.slug)}" aria-label="Remove one ${escapeHtml(product.name)}">−</button><span>${line.quantity}</span><button type="button" data-cart-increase="${escapeHtml(product.slug)}" aria-label="Add one ${escapeHtml(product.name)}">＋</button></div>
       </div>` : "";
     }).join("");
@@ -280,7 +284,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     if (image) { image.src = product.image || ""; image.alt = product.imageAlt || product.name; }
     dialog.querySelector<HTMLElement>("[data-dialog-name]")!.textContent = product.name;
     dialog.querySelector<HTMLElement>("[data-dialog-description]")!.textContent = product.description;
-    dialog.querySelector<HTMLElement>("[data-dialog-size]")!.textContent = product.size || "Details to be confirmed";
+    dialog.querySelector<HTMLElement>("[data-dialog-size]")!.textContent = product.size || localized("home.detailsConfirm", "Details to be confirmed");
     dialog.querySelector<HTMLElement>("[data-dialog-notes]")!.textContent = product.notes.join(" · ");
     dialog.querySelector<HTMLElement>("[data-dialog-composition]")!.textContent = product.composition;
     dialog.showModal();
@@ -291,5 +295,6 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   document.querySelector<HTMLElement>("[data-dialog-add]")?.addEventListener("click", () => { addToCart(dialogSlug); dialog?.close(); });
   dialog?.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
 
+  window.addEventListener("hn:localechange", () => renderCart());
   renderCart();
 </script>

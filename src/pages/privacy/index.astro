@@ -1,19 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
 import { withBase } from "../../data/site";
 ---
 
 <BaseLayout title="Privacy | Heaven & Nature" description="Privacy information for the Heaven and Nature website." path="/privacy/">
+  <SiteHeader />
   <main id="main" class="legal-page">
-    <a class="product-back text-link" href={withBase("/")}>Back to Heaven &amp; Nature</a>
-    <p class="eyebrow">Privacy</p>
-    <h1>Quiet by design</h1>
-    <p>This website is a catalogue for Heaven &amp; Nature, a Pakistan-based fragrance brand. It does not currently collect customer accounts, payments or order details.</p>
-    <h2>What we receive</h2>
-    <p>If you contact the brand through WhatsApp or another official channel, Heaven &amp; Nature may receive the information you choose to share, such as your name and message. That information is used to reply to you and is not sold.</p>
-    <h2>Images and analytics</h2>
-    <p>This site uses owner-supplied product photography. No analytics or advertising cookies are installed in this draft website.</p>
-    <h2>Questions</h2>
-    <p>The website links to WhatsApp for product questions and ordering. WhatsApp handles that conversation under its own privacy terms.</p>
+    <a class="product-back text-link" href={withBase("/")}><span data-i18n="legal.back">Back to Heaven &amp; Nature</span></a>
+    <p class="eyebrow" data-i18n="privacy.eyebrow">Privacy</p>
+    <h1 data-i18n="privacy.title">Quiet by design</h1>
+    <p data-i18n="privacy.intro">This website is a catalogue for Heaven &amp; Nature, a Pakistan-based fragrance brand. It does not currently collect customer accounts, payments or order details.</p>
+    <h2 data-i18n="privacy.receiveTitle">What we receive</h2>
+    <p data-i18n="privacy.receiveBody">If you contact the brand through WhatsApp or another official channel, Heaven &amp; Nature may receive the information you choose to share, such as your name and message. That information is used to reply to you and is not sold.</p>
+    <h2 data-i18n="privacy.imagesTitle">Images and analytics</h2>
+    <p data-i18n="privacy.imagesBody">This site uses owner-supplied product photography. No analytics or advertising cookies are installed in this draft website.</p>
+    <h2 data-i18n="privacy.questionsTitle">Questions</h2>
+    <p data-i18n="privacy.questionsBody">The website links to WhatsApp for product questions and ordering. WhatsApp handles that conversation under its own privacy terms.</p>
   </main>
 </BaseLayout>
