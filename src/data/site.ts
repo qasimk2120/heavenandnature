@@ -1,6 +1,6 @@
 export const site = {
   name: "Heaven & Nature",
-  description: "A Pakistan-based independent fragrance brand built around transparent glass, considered labels and wooden caps.",
+  description: "H&N Scents is a Pakistan-based fragrance brand with transparent glass bottles, considered labels and warm wooden caps.",
   location: "Pakistan",
   fallbackUrl: "https://heavenandnature.example"
 } as const;

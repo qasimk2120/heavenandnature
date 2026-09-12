@@ -13,7 +13,7 @@ const { batch } = Astro.props;
   <button class="catalogue-main" type="button" data-product-details={batch.slug} aria-label={`View details for ${batch.name}`}>
     <figure class="catalogue-image">
       {batch.image ? (
-        <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} loading="lazy" decoding="async" />
+        <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} width="900" height="972" loading="lazy" decoding="async" />
       ) : (
         <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>
       )}

@@ -10,6 +10,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: site.name,
   description: site.description,
+  "@id": configuredSiteUrl ? absoluteUrl("/#organization") : undefined,
   logo: configuredSiteUrl ? absoluteUrl("/brand/Logo.jpeg") : undefined,
   url: configuredSiteUrl ? absoluteUrl("/") : undefined,
   areaServed: {
@@ -18,11 +19,41 @@ const organizationSchema = {
   }
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: site.name,
+  description: site.description,
+  url: configuredSiteUrl ? absoluteUrl("/") : undefined,
+  inLanguage: "en-PK",
+  publisher: { "@id": configuredSiteUrl ? absoluteUrl("/#organization") : undefined }
+};
+
+const catalogueSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "H&N Scents bottle catalogue",
+  description: "Owner-supplied visual references for H&N Scents fragrance bottles.",
+  numberOfItems: batches.length,
+  itemListElement: batches.map((batch, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: batch.name,
+    description: batch.shortDescription,
+    image: batch.image && configuredSiteUrl ? absoluteUrl(batch.image) : undefined
+  }))
+};
+
 const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
 ---
 
-<BaseLayout>
-  <StructuredData data={organizationSchema} />
+<BaseLayout
+  title="H&N Scents | Heaven & Nature perfume in Pakistan"
+  description="Explore H&N Scents fragrance bottles, presentation boxes and current catalogue references. Ask about availability and delivery throughout Pakistan on WhatsApp."
+  path="/"
+  image="/batches/collection-flat-lay.jpg"
+>
+  <StructuredData data={[organizationSchema, websiteSchema, catalogueSchema]} />
   <header class="site-header">
     <a class="brand-lockup" href="#top" aria-label="Heaven and Nature home">
       <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
@@ -41,7 +72,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <figure class="hero-still-life">
-        <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" />
+        <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" fetchpriority="high" decoding="async" />
       </figure>
       <div class="hero-copy">
         <p class="eyebrow">Heaven &amp; Nature · Pakistan</p>
