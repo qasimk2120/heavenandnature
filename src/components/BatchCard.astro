@@ -1,6 +1,6 @@
 ---
 import type { Batch } from "../data/batches";
-import { withBase } from "../data/site";
+import { whatsappUrl, withBase } from "../data/site";
 
 interface Props {
   batch: Batch;
@@ -22,5 +22,6 @@ const { batch } = Astro.props;
     {batch.collection && <p class="batch-collection">{batch.collection}</p>}
     <p class="batch-notes">{batch.shortDescription}</p>
     <p class="catalogue-size">{batch.size || "Details to be confirmed"}</p>
+    <a class="catalogue-shop" href={whatsappUrl(`Hi H&N Scents, I would like to ask about ${batch.name}.`)} target="_blank" rel="noreferrer">Ask about this bottle <span aria-hidden="true">↗</span></a>
   </div>
 </li>

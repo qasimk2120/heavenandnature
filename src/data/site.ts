@@ -15,6 +15,12 @@ export const isDomainConfigured = Boolean(
   configuredSiteUrl && !new URL(configuredSiteUrl).hostname.endsWith(".example")
 );
 
+const whatsappNumber = (import.meta.env.PUBLIC_WHATSAPP_NUMBER || "").replace(/\D/g, "");
+export const whatsappUrl = (message: string) => {
+  const destination = whatsappNumber ? `https://wa.me/${whatsappNumber}` : "https://wa.me/";
+  return `${destination}?text=${encodeURIComponent(message)}`;
+};
+
 export const withBase = (path = "/") => {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${siteBase}${normalizedPath}` || "/";
