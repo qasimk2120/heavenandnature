@@ -33,8 +33,8 @@ const websiteSchema = {
 const catalogueSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "H&N Scents bottle catalogue",
-  description: "Owner-supplied visual references for H&N Scents fragrance bottles.",
+  name: "H&N Scents fragrance catalogue",
+  description: "Owner-supplied visual references for H&N Scents fragrances and presentation.",
   numberOfItems: batches.length,
   itemListElement: batches.map((batch, index) => ({
     "@type": "ListItem",
@@ -50,7 +50,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
 
 <BaseLayout
   title="H&N Scents | Heaven & Nature perfume in Pakistan"
-  description="Explore H&N Scents fragrance bottles, presentation boxes and current catalogue references. Ask about availability and delivery throughout Pakistan on WhatsApp."
+  description="Explore H&N Scents fragrances, scent profiles and presentation details. Ask about availability and delivery throughout Pakistan on WhatsApp."
   path="/"
   image="/og/home-og.jpg"
 >
@@ -65,9 +65,9 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <div class="hero-copy">
         <p class="eyebrow" data-i18n="home.eyebrow">Heaven &amp; Nature · Pakistan</p>
         <h1 id="hero-title">H&amp;N Scents</h1>
-        <p class="hero-intro" data-i18n="home.intro">A photographic catalogue of the bottles, labels and presentation pieces currently shared by the brand.</p>
+        <p class="hero-intro" data-i18n="home.intro">Explore H&amp;N Scents fragrances, scent profiles and the details behind each presentation.</p>
         <div class="hero-actions">
-          <a class="text-link" href="#collection"><span data-i18n="home.see">See the bottles</span></a>
+          <a class="text-link" href="#collection"><span data-i18n="home.see">Explore the fragrances</span></a>
           <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.shop">Shop on WhatsApp</span></a>
         </div>
         <p class="delivery-note">
@@ -80,11 +80,10 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-heading">
-        <p class="eyebrow" data-i18n="home.catalogueEyebrow">Bottle catalogue</p>
-        <h2 id="collection-title" data-i18n="home.collectionTitle">Six bottle references</h2>
-        <p data-i18n="home.collectionIntro">These six bottles are shown as a visual reference from the supplied H&amp;N Scents photography. Choose a bottle to ask about availability and ordering on WhatsApp.</p>
+        <p class="eyebrow" data-i18n="home.catalogueEyebrow">Fragrance catalogue</p>
+        <h2 id="collection-title" data-i18n="home.collectionTitle">Six fragrance references</h2>
+        <p data-i18n="home.collectionIntro">These six fragrances are shown as visual references from supplied H&amp;N Scents photography. Choose a fragrance to ask about availability and ordering on WhatsApp.</p>
       </div>
-      <p class="collection-delivery"><span data-i18n="home.collectionDeliveryLabel">Wherever you are</span> <span data-i18n="home.collectionDelivery">H&amp;N Scents delivers throughout Pakistan.</span></p>
       <div class="catalogue-filters" aria-label="Browse by scent style">
         <p class="eyebrow" data-i18n="home.categoryEyebrow">Browse by scent style</p>
         <div class="category-filter-list" role="group" aria-label="Scent style filters">
@@ -109,20 +108,20 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <div class="ordering-heading">
         <p class="eyebrow" data-i18n="home.orderEyebrow">How ordering works</p>
         <h2 id="ordering-title" data-i18n="home.orderTitle">A simple conversation, not a checkout maze</h2>
-        <p data-i18n="home.orderIntro">Choose a bottle here, then send your selection to the brand on WhatsApp. Availability, price and delivery are confirmed with you directly.</p>
+        <p data-i18n="home.orderIntro">Choose a fragrance here, then send your selection to the brand on WhatsApp. Availability, price and delivery are confirmed with you directly.</p>
       </div>
       <ol class="ordering-steps">
         <li class="ordering-step">
           <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></span>
           <span class="ordering-step-number">01</span>
-          <h3 data-i18n="home.orderStepOne">Choose a bottle</h3>
+          <h3 data-i18n="home.orderStepOne">Choose a fragrance</h3>
           <p data-i18n="home.orderStepOneBody">Open the details to see its notes and composition.</p>
         </li>
         <li class="ordering-step">
           <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M5 7.5h14v11H5z"></path><path d="M8 7.5a4 4 0 0 1 8 0"></path><path d="M9 12h6"></path></svg></span>
           <span class="ordering-step-number">02</span>
           <h3 data-i18n="home.orderStepTwo">Build your selection</h3>
-          <p data-i18n="home.orderStepTwoBody">Add one or more bottles to the cart while you browse.</p>
+          <p data-i18n="home.orderStepTwoBody">Add one or more fragrances to the cart while you browse.</p>
         </li>
         <li class="ordering-step">
           <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M4 5h16v12H4z"></path><path d="m8 21 4-4 4 4"></path><path d="M8 9h8M8 12h5"></path></svg></span>
@@ -142,7 +141,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <p class="eyebrow" data-i18n="home.packagingEyebrow">Packaging details</p>
         <h2 id="craft-title" data-i18n="home.packagingTitle">The bottle, clearly</h2>
         <p data-i18n="home.packagingText">Clear glass keeps the liquid visible. The wooden cap adds warmth. The printed label gives each bottle its own character.</p>
-        <p class="quiet" data-i18n="home.packagingQuiet">There is no online checkout here. Use WhatsApp to ask about a bottle, confirm the current batch and arrange an order with the brand.</p>
+        <p class="quiet" data-i18n="home.packagingQuiet">There is no online checkout here. Use WhatsApp to ask about a fragrance, confirm the current batch and arrange an order with the brand.</p>
       </div>
     </section>
   </main>
@@ -153,7 +152,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <div class="product-dialog-grid">
         <figure class="product-dialog-image"><img data-dialog-image src="" alt="" /></figure>
         <div class="product-dialog-copy">
-          <p class="eyebrow" data-i18n="home.detailsEyebrow">Bottle details</p>
+          <p class="eyebrow" data-i18n="home.detailsEyebrow">Fragrance details</p>
           <h2 id="product-dialog-title" data-dialog-name></h2>
           <p data-dialog-description></p>
           <dl class="product-facts">
@@ -176,7 +175,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <button class="dialog-close" type="button" data-cart-close aria-label="Close cart" data-i18n-aria-label="home.dialogClose"><span data-i18n="home.dialogClose">Close</span></button>
     </div>
     <div class="cart-items" data-cart-items>
-      <p class="cart-empty" data-i18n="home.cartEmpty">Your cart is empty. Add a bottle to begin.</p>
+      <p class="cart-empty" data-i18n="home.cartEmpty">Your cart is empty. Add a fragrance to begin.</p>
     </div>
     <div class="cart-panel-foot">
       <p class="cart-note" data-i18n="home.cartNote">No prices are shown yet. WhatsApp is used to confirm the current batch, cost and delivery.</p>
@@ -267,7 +266,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     if (cartWhatsapp) cartWhatsapp.href = `${whatsappBase}?text=${encodeURIComponent(messageForCart())}`;
     if (!cartItems) return;
     if (!cart.length) {
-      cartItems.innerHTML = `<p class="cart-empty">${localized("home.cartEmpty", "Your cart is empty. Add a bottle to begin.")}</p>`;
+      cartItems.innerHTML = `<p class="cart-empty">${localized("home.cartEmpty", "Your cart is empty. Add a fragrance to begin.")}</p>`;
       return;
     }
     cartItems.innerHTML = cart.map((line) => {

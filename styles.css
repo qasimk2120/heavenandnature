@@ -295,28 +295,6 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
   font-size: .95rem;
 }
 
-.collection-delivery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .75rem;
-  align-items: baseline;
-  margin: 0 0 2.75rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
-  line-height: 1;
-}
-
-.collection-delivery span {
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: .62rem;
-  letter-spacing: .1em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-
 .catalogue-filters {
   display: grid;
   grid-template-columns: minmax(130px, .45fr) minmax(0, 1fr) auto;
@@ -1213,8 +1191,6 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   .hero-still-life img { height: min(100vw, 360px); aspect-ratio: 4 / 5; }
 
   .hero-copy { max-width: 32rem; }
-
-  .collection-delivery { margin-bottom: 2rem; }
 
   .section-heading { grid-template-columns: 1fr; gap: .75rem; }
 
