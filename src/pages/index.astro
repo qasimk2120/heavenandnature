@@ -29,8 +29,10 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
     <nav class="site-nav" aria-label="Main navigation">
+      <a href={withBase("/")}>Home</a>
       <a href="#collection">The bottles</a>
       <a href="#story">Packaging</a>
+      <a href={withBase("/contact/")}>Contact</a>
       <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
       <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false">Cart <span data-cart-count>0</span></button>
     </nav>
@@ -131,7 +133,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
     </a>
     <p>Fragrance, held in nature.</p>
-    <nav aria-label="Footer links"><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
+    <nav aria-label="Footer links"><a href={withBase("/contact/")}>Contact</a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
     <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
   </footer>
 </BaseLayout>

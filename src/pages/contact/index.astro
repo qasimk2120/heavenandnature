@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import StructuredData from "../../components/StructuredData.astro";
+import { absoluteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../../data/site";
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: `Contact ${site.name}`,
+  description: "Contact Heaven & Nature about fragrance batches, availability and delivery throughout Pakistan.",
+  url: absoluteUrl("/contact/"),
+  about: { "@type": "Organization", name: site.name, areaServed: site.location },
+  mainEntity: {
+    "@type": "ContactPoint",
+    telephone: "+92 300 8322313",
+    contactType: "customer service",
+    areaServed: "PK",
+    availableLanguage: ["English", "Urdu"]
+  }
+};
+---
+
+<BaseLayout
+  title="Contact | Heaven & Nature"
+  description="Contact Heaven & Nature about fragrance batches, availability and delivery throughout Pakistan."
+  path="/contact/"
+>
+  <StructuredData data={contactSchema} />
+
+  <header class="site-header">
+    <a class="brand-lockup" href={withBase("/")} aria-label="Heaven and Nature home">
+      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
+      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href={withBase("/")}>Home</a>
+      <a href={withBase("/#collection")}>The bottles</a>
+      <a href={withBase("/#story")}>Packaging</a>
+      <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a>
+    </nav>
+  </header>
+
+  <main id="main" class="contact-page">
+    <div class="contact-heading">
+      <p class="eyebrow">A direct line to the brand</p>
+      <h1>Tell us what you’re looking for</h1>
+      <p>Ask about a bottle, a new batch, gift presentation or delivery. We’ll take the conversation to WhatsApp and confirm what is currently available.</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-details">
+        <p class="contact-kicker">Good to know</p>
+        <p class="contact-highlight">Delivery throughout Pakistan.</p>
+        <p class="contact-muted">Prices and availability are confirmed directly with the brand. There is no payment or account checkout on this site.</p>
+        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">+92 300 8322313 <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <form class="contact-form" id="contact-form">
+        <label for="contact-name">Your name <span>optional</span></label>
+        <input id="contact-name" name="name" autocomplete="name" />
+
+        <label for="contact-interest">I’m asking about</label>
+        <select id="contact-interest" name="interest">
+          <option value="a bottle">A bottle</option>
+          <option value="a new batch">A new batch</option>
+          <option value="gift presentation">Gift presentation</option>
+          <option value="delivery">Delivery</option>
+          <option value="something else">Something else</option>
+        </select>
+
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="5" required placeholder="Which scent or question can we help with?"></textarea>
+
+        <button class="contact-submit" type="submit">Open WhatsApp <span aria-hidden="true">↗</span></button>
+        <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <a class="brand-lockup" href={withBase("/")}>
+      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
+      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+    </a>
+    <p>Fragrance, held in nature.</p>
+    <nav aria-label="Footer links"><a href={withBase("/contact/")}>Contact</a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">Shop on WhatsApp</a><a href={withBase("/privacy/")}>Privacy</a><a href={withBase("/terms/")}>Terms</a></nav>
+    <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
+  </footer>
+</BaseLayout>
+
+<script is:inline define:vars={{ whatsappBaseUrl }}>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const status = document.querySelector<HTMLElement>("#contact-status");
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const values = new FormData(form);
+    const name = String(values.get("name") || "").trim();
+    const interest = String(values.get("interest") || "a bottle");
+    const message = String(values.get("message") || "").trim();
+    const greeting = name ? `Hi H&N Scents, I’m ${name}.` : "Hi H&N Scents.";
+    const text = `${greeting}\nI’m asking about ${interest}.\n\n${message}`;
+    window.open(`${whatsappBaseUrl}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+    if (status) status.textContent = "WhatsApp is opening with your message ready to send.";
+  });
+</script>
