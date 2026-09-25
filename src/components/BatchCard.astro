@@ -16,6 +16,7 @@ const { batch, detailsHref } = Astro.props;
     <a class="catalogue-main" href={detailsHref} aria-label={`View details for ${batch.name}`}>
       <figure class="catalogue-image">
         {batch.image ? <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} width="900" height="972" loading="lazy" decoding="async" /> : <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>}
+        <span class="catalogue-details-cue" aria-hidden="true">View details</span>
       </figure>
       <div class="catalogue-caption">
         <h3>{batch.name}</h3>
@@ -30,6 +31,7 @@ const { batch, detailsHref } = Astro.props;
       ) : (
         <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>
       )}
+      <span class="catalogue-details-cue" aria-hidden="true">View details</span>
     </figure>
     <div class="catalogue-caption">
       <h3>{batch.name}</h3>

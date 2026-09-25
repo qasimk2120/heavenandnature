@@ -367,10 +367,43 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
 .catalogue-main:focus-visible { outline: 2px solid var(--cedar); outline-offset: .5rem; }
 
 .catalogue-image {
+  position: relative;
   width: min(100%, 18rem);
   aspect-ratio: 1 / 1;
   overflow: hidden;
   margin: 0 0 1rem;
+}
+
+.catalogue-details-cue {
+  position: absolute;
+  bottom: .7rem;
+  left: .7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .42rem .62rem;
+  border: 1px solid rgba(128, 86, 59, .35);
+  background: rgba(248, 243, 236, .95);
+  color: var(--wood-dark);
+  font-family: var(--sans);
+  font-size: .68rem;
+  letter-spacing: .01em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(.3rem);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.catalogue-details-cue::after { content: "↗"; font-size: .85rem; }
+@media (hover: hover) and (pointer: fine) {
+  .catalogue-main:hover .catalogue-details-cue,
+  .catalogue-main:focus-visible .catalogue-details-cue { opacity: 1; transform: none; }
+}
+@media (hover: none), (pointer: coarse) {
+  .catalogue-details-cue { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalogue-details-cue { transition: none; }
 }
 
 .catalogue-image img,
