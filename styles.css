@@ -436,7 +436,7 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  align-items: baseline;
+  align-items: center;
   margin-top: 1.25rem;
 }
 
