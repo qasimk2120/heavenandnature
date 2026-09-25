@@ -1720,3 +1720,6 @@ body { font-family: var(--editorial); }
   .contact-form-intro { max-width: 36rem; margin-inline: auto; }
   .contact-form { max-width: 42rem; margin-inline: auto; }
 }
+
+/* Keep the contact action visibly distinct in the header. */
+.header-primary-links > a .whatsapp-icon, .site-nav .contact-nav-link .whatsapp-icon { width: 1.12rem; height: 1.12rem; flex-basis: 1.12rem; color: var(--cedar); stroke-width: 1.8; }
