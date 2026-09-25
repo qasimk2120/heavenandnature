@@ -39,7 +39,11 @@ const { showCart = false } = Astro.props;
   </a>
 
   <div class="header-actions">
-    {showCart && <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false"><svg class="cart-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2.25 3.25h2.1l2.05 9.3a1.4 1.4 0 0 0 1.37 1.1h7.1a1.4 1.4 0 0 0 1.34-1l1.55-5.8H5.1" /><circle cx="8" cy="16.6" r=".9" /><circle cx="14.6" cy="16.6" r=".9" /></svg><span data-i18n="nav.cart">Cart</span> <span data-cart-count>0</span></button>}
+    {showCart ? (
+      <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false"><svg class="cart-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2.25 3.25h2.1l2.05 9.3a1.4 1.4 0 0 0 1.37 1.1h7.1a1.4 1.4 0 0 0 1.34-1l1.55-5.8H5.1" /><circle cx="8" cy="16.6" r=".9" /><circle cx="14.6" cy="16.6" r=".9" /></svg><span data-i18n="nav.cart">Cart</span> <span data-cart-count>0</span></button>
+    ) : (
+      <a class="cart-trigger" href={withBase("/?cart=open#collection")}><svg class="cart-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2.25 3.25h2.1l2.05 9.3a1.4 1.4 0 0 0 1.37 1.1h7.1a1.4 1.4 0 0 0 1.34-1l1.55-5.8H5.1" /><circle cx="8" cy="16.6" r=".9" /><circle cx="14.6" cy="16.6" r=".9" /></svg><span data-i18n="nav.cart">Cart</span> <span data-cart-count>0</span></a>
+    )}
     <button class="menu-trigger" type="button" aria-controls="site-navigation" aria-expanded="false" data-menu-trigger>
       <span data-menu-label data-i18n="nav.menu">Menu</span>
       <span class="menu-mark" aria-hidden="true"><i></i><i></i></span>
@@ -67,6 +71,16 @@ const { showCart = false } = Astro.props;
   type HnI18n = { get: (key: string, fallback?: string) => string };
   const i18n = () => (window as Window & { hnI18n?: HnI18n }).hnI18n;
   const headers = document.querySelectorAll<HTMLElement>("[data-site-header]");
+
+  try {
+    const savedCart = JSON.parse(localStorage.getItem("heaven-and-nature-cart") || "[]");
+    const count = Array.isArray(savedCart)
+      ? savedCart.reduce((total, line) => total + (Number.isInteger(line?.quantity) && line.quantity > 0 ? line.quantity : 0), 0)
+      : 0;
+    document.querySelectorAll<HTMLElement>("[data-cart-count]").forEach((node) => { node.textContent = String(count); });
+  } catch {
+    document.querySelectorAll<HTMLElement>("[data-cart-count]").forEach((node) => { node.textContent = "0"; });
+  }
 
   headers.forEach((header) => {
     const trigger = header.querySelector<HTMLButtonElement>("[data-menu-trigger]");

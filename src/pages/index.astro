@@ -365,4 +365,5 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   renderCart();
   localizeCardActions();
   applyCategory("all");
+  if (new URLSearchParams(window.location.search).get("cart") === "open") setCartOpen(true);
 </script>
