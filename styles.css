@@ -1726,3 +1726,5 @@ body { font-family: var(--editorial); }
 
 .nav-categories > summary { display: inline-flex; align-items: center; gap: .35rem; }
 .category-icon { display: inline-block; width: 1rem; height: 1rem; flex: 0 0 1rem; fill: none; stroke: var(--cedar); stroke-width: 1.35; stroke-linejoin: round; vertical-align: -.16em; }
+
+.header-primary-links > a .phone-icon, .site-nav .contact-nav-link .phone-icon { width: 1.12rem; height: 1.12rem; flex-basis: 1.12rem; color: var(--cedar); stroke-width: 1.8; }
