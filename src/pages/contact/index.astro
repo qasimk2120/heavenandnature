@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
-import { absoluteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../../data/site";
+import { absoluteUrl, site, whatsappBaseUrl, whatsappDisplayNumber, whatsappTelephone, whatsappUrl, withBase } from "../../data/site";
 
 const contactSchema = {
   "@context": "https://schema.org",
@@ -14,7 +14,7 @@ const contactSchema = {
   about: { "@type": "Organization", name: site.name, areaServed: site.location },
   mainEntity: {
     "@type": "ContactPoint",
-    telephone: "+92 318 01946060",
+    telephone: whatsappTelephone,
     contactType: "customer service",
     areaServed: "PK",
     availableLanguage: ["English", "Urdu", "Pashto", "Punjabi", "Sindhi"]
@@ -35,8 +35,8 @@ const contactSchema = {
     <section class="inner-hero contact-hero" aria-labelledby="contact-title">
       <div class="inner-hero-copy">
         <h1 id="contact-title" data-i18n="footer.contact">Contact</h1>
-        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">+92 318 01946060 <span aria-hidden="true">↗</span></a>
-        <a class="contact-call" href="tel:+9231801946060" data-i18n="contact.call">Call this number</a>
+        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">{whatsappDisplayNumber} <span aria-hidden="true">↗</span></a>
+        <a class="contact-call" href={`tel:${whatsappTelephone}`} data-i18n="contact.call">Call this number</a>
       </div>
       <figure class="inner-hero-image"><img src={withBase("/batches/presentation-box.jpg")} alt="H&N Scents presentation box with perfume packaging." width="1200" height="1200" fetchpriority="high" decoding="async" /></figure>
     </section>

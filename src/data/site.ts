@@ -15,7 +15,9 @@ export const isDomainConfigured = Boolean(
   configuredSiteUrl && !new URL(configuredSiteUrl).hostname.endsWith(".example")
 );
 
-const whatsappNumber = (import.meta.env.PUBLIC_WHATSAPP_NUMBER || "9231801946060").replace(/\D/g, "");
+export const whatsappNumber = (import.meta.env.PUBLIC_WHATSAPP_NUMBER || "923180194606").replace(/\D/g, "");
+export const whatsappTelephone = `+${whatsappNumber}`;
+export const whatsappDisplayNumber = whatsappNumber === "923180194606" ? "+92 318 0194606" : whatsappTelephone;
 export const whatsappBaseUrl = `https://wa.me/${whatsappNumber}`;
 export const whatsappUrl = (message: string) => {
   return `${whatsappBaseUrl}?text=${encodeURIComponent(message)}`;

@@ -168,7 +168,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   const products = (dataNode ? JSON.parse(dataNode.textContent || "[]") : []) as Product[];
   const productBySlug = new Map<string, Product>(products.map((product) => [product.slug, product]));
   const storageKey = "heaven-and-nature-cart";
-  const whatsappBase = document.querySelector<HTMLElement>("[data-whatsapp-base]")?.dataset.whatsappBase || "https://wa.me/9231801946060";
+  const whatsappBase = document.querySelector<HTMLElement>("[data-whatsapp-base]")?.dataset.whatsappBase || "https://wa.me/923180194606";
   let cart: CartLine[] = [];
   const localized = (key: string, fallback: string) => {
     const current = (window as Window & { hnI18n?: { get: (key: string, fallback?: string) => string } }).hnI18n;
