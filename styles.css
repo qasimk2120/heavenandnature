@@ -1472,6 +1472,13 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
 @media (max-width: 800px) {
   .site-nav { left: auto; width: min(19rem, calc(100vw - 2rem)); border: 1px solid var(--line); }
   .site-nav > a { width: 100%; min-height: 40px; padding: .55rem 0; }
+  .header-primary-links > a,
+  .header-primary-links > .nav-categories { display: none; }
+  .site-nav .mobile-nav-categories { display: grid; min-height: 40px; padding: .55rem 0; border-bottom: 1px solid var(--line); }
+  .site-nav .mobile-nav-categories > summary { display: flex; align-items: center; gap: .45rem; min-height: 32px; cursor: pointer; list-style: none; }
+  .site-nav .mobile-nav-categories > summary::-webkit-details-marker { display: none; }
+  .site-nav .mobile-nav-category-links { display: grid; gap: 0; padding: .2rem 0 .35rem 1.4rem; }
+  .site-nav .mobile-nav-category-links a { min-height: 34px; padding: .45rem 0; border-bottom: 0; text-decoration: none; }
   .nav-category-popover { top: calc(100% + 1.4rem); width: min(32rem, calc(100vw - 2rem)); padding: 1rem; border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(31, 47, 40, .1); }
   .nav-category-grid a + a { border-bottom: 0; }
   .footer-inner { width: min(100% - 2rem, 1100px); }
@@ -1481,7 +1488,6 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   .site-header { gap: .35rem; }
   .site-header > .brand-lockup .wordmark { font-size: 0; }
   .site-header > .brand-lockup .wordmark-script { font-size: 1.5rem; }
-  .header-primary-links > a { display: none; }
   .header-primary-links, .header-actions { gap: .55rem; }
   .header-actions .cart-trigger, .menu-trigger { font-size: .72rem; }
 }
@@ -1728,12 +1734,3 @@ body { font-family: var(--editorial); }
 
 .mobile-nav-categories { display: none; }
 .site-nav .mobile-nav-categories > summary:hover, .site-nav .mobile-nav-categories[open] > summary { color: var(--cedar); }
-
-@media (max-width: 520px) {
-  .header-primary-links > .nav-categories { display: none; }
-  .site-nav .mobile-nav-categories { display: grid; min-height: 40px; padding: .55rem 0; border-bottom: 1px solid var(--line); }
-  .site-nav .mobile-nav-categories > summary { display: flex; align-items: center; gap: .45rem; min-height: 32px; cursor: pointer; list-style: none; }
-  .site-nav .mobile-nav-categories > summary::-webkit-details-marker { display: none; }
-  .site-nav .mobile-nav-category-links { display: grid; gap: 0; padding: .2rem 0 .35rem 1.4rem; }
-  .site-nav .mobile-nav-category-links a { min-height: 34px; padding: .45rem 0; border-bottom: 0; text-decoration: none; }
-}
