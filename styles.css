@@ -1721,10 +1721,19 @@ body { font-family: var(--editorial); }
   .contact-form { max-width: 42rem; margin-inline: auto; }
 }
 
-/* Keep the contact action visibly distinct in the header. */
-.header-primary-links > a .whatsapp-icon, .site-nav .contact-nav-link .whatsapp-icon { width: 1.12rem; height: 1.12rem; flex-basis: 1.12rem; color: var(--cedar); stroke-width: 1.8; }
-
 .nav-categories > summary { display: inline-flex; align-items: center; gap: .35rem; }
 .category-icon { display: inline-block; width: 1rem; height: 1rem; flex: 0 0 1rem; fill: none; stroke: var(--cedar); stroke-width: 1.35; stroke-linejoin: round; vertical-align: -.16em; }
 
 .header-primary-links > a .phone-icon, .site-nav .contact-nav-link .phone-icon { width: 1.12rem; height: 1.12rem; flex-basis: 1.12rem; color: var(--cedar); stroke-width: 1.8; }
+
+.mobile-nav-categories { display: none; }
+.site-nav .mobile-nav-categories > summary:hover, .site-nav .mobile-nav-categories[open] > summary { color: var(--cedar); }
+
+@media (max-width: 520px) {
+  .header-primary-links > .nav-categories { display: none; }
+  .site-nav .mobile-nav-categories { display: grid; min-height: 40px; padding: .55rem 0; border-bottom: 1px solid var(--line); }
+  .site-nav .mobile-nav-categories > summary { display: flex; align-items: center; gap: .45rem; min-height: 32px; cursor: pointer; list-style: none; }
+  .site-nav .mobile-nav-categories > summary::-webkit-details-marker { display: none; }
+  .site-nav .mobile-nav-category-links { display: grid; gap: 0; padding: .2rem 0 .35rem 1.4rem; }
+  .site-nav .mobile-nav-category-links a { min-height: 34px; padding: .45rem 0; border-bottom: 0; text-decoration: none; }
+}
