@@ -1429,9 +1429,11 @@ footer nav { display: flex; flex-wrap: wrap; gap: 1rem; }
   font-family: var(--sans);
   font-size: .7rem;
 }
-.footer-inner { display: flex; width: min(1100px, calc(100% - 4rem)); min-height: 68px; margin: 0 auto; align-items: center; justify-content: space-between; gap: 1.5rem; }
-.footer-meta { display: flex; flex-wrap: wrap; gap: .35rem 1rem; align-items: center; }
-.site-footer .footer-social { width: 1.5rem; height: 1.5rem; color: #83908c; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; width: min(1100px, calc(100% - 4rem)); min-height: 68px; margin: 0 auto; align-items: center; gap: 1rem; }
+.footer-meta { display: contents; }
+.footer-meta p { justify-self: center; margin: 0; white-space: nowrap; }
+.site-footer .footer-contact { display: inline-flex; align-items: center; justify-self: start; gap: .35rem; }
+.site-footer .footer-social { justify-self: end; width: 1.5rem; height: 1.5rem; color: #83908c; }
 .site-footer .footer-social svg { width: 1rem; height: 1rem; }
 .site-footer a { border-bottom: 0; }
 
@@ -1534,7 +1536,7 @@ body { font-family: var(--editorial); }
 .header-primary-links > a,
 .nav-categories > summary,
 .site-nav > a,
-.site-footer .footer-meta > a,
+.site-footer .footer-contact,
 .header-actions .cart-trigger,
 .header-actions .menu-trigger,
 .contact-page .contact-phone,
@@ -1547,7 +1549,7 @@ body { font-family: var(--editorial); }
 .header-primary-links > a::after,
 .nav-categories > summary::after,
 .site-nav > a::after,
-.site-footer .footer-meta > a::after,
+.site-footer .footer-contact::after,
 .header-actions .cart-trigger::after,
 .header-actions .menu-trigger::after,
 .contact-page .contact-phone::after,
@@ -1570,7 +1572,7 @@ body { font-family: var(--editorial); }
 .nav-categories > summary:hover::after,
 .nav-categories[open] > summary::after,
 .site-nav > a:hover::after,
-.site-footer .footer-meta > a:hover::after,
+.site-footer .footer-contact:hover::after,
 .header-actions .cart-trigger:hover::after,
 .header-actions .menu-trigger:hover::after,
 .contact-page .contact-phone:hover::after,
@@ -1578,6 +1580,8 @@ body { font-family: var(--editorial); }
 .text-link:hover::after { opacity: .95; transform: scaleX(1); }
 .nav-categories > summary { display: inline-block; }
 .contact-page .contact-call { display: inline-block; }
+.header-primary-links > a,
+.site-nav .contact-nav-link { display: inline-flex; align-items: center; gap: .35rem; }
 .header-actions .cart-trigger,
 .header-actions .menu-trigger { color: var(--cedar); }
 .header-actions .cart-trigger:hover,
