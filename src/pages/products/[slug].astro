@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { batches } from "../../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, withBase } from "../../data/site";
@@ -45,8 +46,10 @@ const productSchema = batch.price !== undefined && batch.image && configuredSite
         <h1>{batch.name}</h1>
         <p>{batch.description}</p>
         {batch.size && <p><strong data-i18n="product.size">Size:</strong> {batch.size}</p>}
-        {batch.price !== undefined && <p><strong data-i18n="product.price">Price:</strong> PKR {batch.price.toLocaleString("en-PK")}</p>}
+        {batch.inspiredBy && <p><strong>Inspired by:</strong> {batch.inspiredBy}</p>}
+        {batch.price !== undefined && <p><strong data-i18n="product.price">Price:</strong> {batch.originalPrice !== undefined && <del>PKR {batch.originalPrice.toLocaleString("en-PK")}</del>} PKR {batch.price.toLocaleString("en-PK")}</p>}
       </div>
     </article>
   </main>
+  <SiteFooter />
 </BaseLayout>

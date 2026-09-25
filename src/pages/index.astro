@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BatchCard from "../components/BatchCard.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { batches } from "../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../data/site";
@@ -57,44 +58,43 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   <StructuredData data={[organizationSchema, websiteSchema, catalogueSchema]} />
   <SiteHeader showCart />
 
-  <main id="main">
+  <main id="main" class="home-page">
     <section class="hero" id="top" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="sr-only">Heaven &amp; Nature fragrances</h1>
       <figure class="hero-still-life">
-        <img src={withBase("/batches/collection-flat-lay.jpg")} alt="A selection of H&N Scents perfume bottles arranged around a presentation box." width="1200" height="1500" fetchpriority="high" decoding="async" />
+        <img src={withBase("/batches/collection-bloom-hero.jpeg")} alt="H&N Scents perfumes with wooden caps among blossoms, greenery, stone and driftwood." width="1600" height="900" fetchpriority="high" decoding="async" />
       </figure>
-      <div class="hero-copy">
-        <p class="eyebrow" data-i18n="home.eyebrow">Heaven &amp; Nature · Pakistan</p>
-        <h1 id="hero-title">H&amp;N Scents</h1>
-        <p class="hero-intro" data-i18n="home.intro">Explore H&amp;N Scents fragrances, scent profiles and the details behind each presentation.</p>
-        <div class="hero-actions">
-          <a class="text-link" href="#collection"><span data-i18n="home.see">Explore the fragrances</span></a>
-          <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.shop">Shop on WhatsApp</span></a>
-        </div>
-        <p class="delivery-note">
-          <span class="delivery-note-label"><span class="delivery-note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M3 6h11v10H3z"></path><path d="M14 10h4l3 3v3h-7z"></path><circle cx="7" cy="18" r="1.5"></circle><circle cx="18" cy="18" r="1.5"></circle></svg></span><span data-i18n="home.deliveryLabel">Nationwide delivery</span></span>
-          <strong data-i18n="home.deliveryTitle">Throughout Pakistan</strong>
-          <small data-i18n="home.deliveryNote">Ask on WhatsApp for the current batch and delivery details.</small>
-        </p>
-      </div>
     </section>
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="home.catalogueEyebrow">Fragrance catalogue</p>
-        <h2 id="collection-title" data-i18n="home.collectionTitle">Six fragrance references</h2>
-        <p data-i18n="home.collectionIntro">These six fragrances are shown as visual references from supplied H&amp;N Scents photography. Choose a fragrance to ask about availability and ordering on WhatsApp.</p>
-      </div>
-      <div class="catalogue-filters" aria-label="Browse by scent style">
-        <p class="eyebrow" data-i18n="home.categoryEyebrow">Browse by scent style</p>
-        <div class="category-filter-list" role="group" aria-label="Scent style filters">
-          <button class="category-filter is-active" type="button" data-category-filter="all" aria-pressed="true" data-i18n="home.categoryAll">All scents</button>
-          <button class="category-filter" type="button" data-category-filter="fresh" aria-pressed="false" data-i18n="home.categoryFresh">Fresh</button>
-          <button class="category-filter" type="button" data-category-filter="floral" aria-pressed="false" data-i18n="home.categoryFloral">Floral</button>
-          <button class="category-filter" type="button" data-category-filter="woody" aria-pressed="false" data-i18n="home.categoryWoody">Woody</button>
-          <button class="category-filter" type="button" data-category-filter="oud" aria-pressed="false" data-i18n="home.categoryOud">Oud</button>
+      <h2 id="collection-title" class="sr-only">Fragrance collection</h2>
+      <div class="catalogue-filters" aria-label="Browse fragrances">
+        <div class="category-filter-list" role="group" aria-label="Audience filters">
+          <button class="category-filter is-active" type="button" data-category-filter="all" aria-pressed="true" data-i18n="home.audienceAll">All</button>
+          <button class="category-filter" type="button" data-category-filter="unisex" aria-pressed="false" data-i18n="home.audienceUnisex">Unisex</button>
+          <button class="category-filter" type="button" data-category-filter="male" aria-pressed="false" data-i18n="home.audienceMen">Men</button>
+          <button class="category-filter" type="button" data-category-filter="female" aria-pressed="false" data-i18n="home.audienceWomen">Women</button>
         </div>
-        <p class="category-filter-status" data-category-filter-status aria-live="polite" data-i18n="home.categoryStatusAll">Showing all six references.</p>
+        <div class="catalogue-tools">
+          <label class="style-filter">
+            <span class="sr-only" data-i18n="home.filterByStyle">Filter by scent style</span>
+            <select data-style-filter aria-label="Filter by scent style" data-i18n-aria-label="home.filterByStyle">
+              <option value="all" data-i18n="home.filter">Filter</option>
+              <option value="fresh" data-i18n="home.categoryFresh">Fresh</option>
+              <option value="floral" data-i18n="home.categoryFloral">Floral</option>
+              <option value="woody" data-i18n="home.categoryWoody">Woody</option>
+              <option value="oud" data-i18n="home.categoryOud">Oud</option>
+            </select>
+          </label>
+          <span class="tool-divider" aria-hidden="true">/</span>
+          <label class="catalogue-search">
+            <span class="sr-only">Search fragrances</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg>
+            <input type="search" data-catalogue-search placeholder="Search" aria-label="Search fragrances" data-i18n-placeholder="home.searchShort" data-i18n-aria-label="home.searchPlaceholder" />
+          </label>
+        </div>
       </div>
+      <p class="sr-only" data-category-filter-status aria-live="polite"></p>
       {batches.length ? (
         <ul class="catalogue-grid">
           {batches.map((batch) => <BatchCard batch={batch} />)}
@@ -102,47 +102,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       ) : (
         <p class="empty-state">The first release will be announced here.</p>
       )}
-    </section>
-
-    <section class="ordering-guide" aria-labelledby="ordering-title">
-      <div class="ordering-heading">
-        <p class="eyebrow" data-i18n="home.orderEyebrow">How ordering works</p>
-        <h2 id="ordering-title" data-i18n="home.orderTitle">A simple conversation, not a checkout maze</h2>
-        <p data-i18n="home.orderIntro">Choose a fragrance here, then send your selection to the brand on WhatsApp. Availability, price and delivery are confirmed with you directly.</p>
-      </div>
-      <ol class="ordering-steps">
-        <li class="ordering-step">
-          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg></span>
-          <span class="ordering-step-number">01</span>
-          <h3 data-i18n="home.orderStepOne">Choose a fragrance</h3>
-          <p data-i18n="home.orderStepOneBody">Open the details to see its notes and composition.</p>
-        </li>
-        <li class="ordering-step">
-          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M5 7.5h14v11H5z"></path><path d="M8 7.5a4 4 0 0 1 8 0"></path><path d="M9 12h6"></path></svg></span>
-          <span class="ordering-step-number">02</span>
-          <h3 data-i18n="home.orderStepTwo">Build your selection</h3>
-          <p data-i18n="home.orderStepTwoBody">Add one or more fragrances to the cart while you browse.</p>
-        </li>
-        <li class="ordering-step">
-          <span class="ordering-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M4 5h16v12H4z"></path><path d="m8 21 4-4 4 4"></path><path d="M8 9h8M8 12h5"></path></svg></span>
-          <span class="ordering-step-number">03</span>
-          <h3 data-i18n="home.orderStepThree">Send it on WhatsApp</h3>
-          <p data-i18n="home.orderStepThreeBody">We’ll confirm the current batch, cost and delivery with you.</p>
-        </li>
-      </ol>
-      <a class="ordering-cta text-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.orderCta">Start on WhatsApp</span><span class="link-icon" aria-hidden="true">↗</span></a>
-    </section>
-
-    <section class="craft" id="story" aria-labelledby="craft-title">
-      <figure class="craft-art">
-        <img src={withBase("/batches/presentation-box.jpg")} alt="An open H&N Scents presentation box beside its closed floral box." width="1200" height="1200" loading="lazy" decoding="async" />
-      </figure>
-      <div class="craft-copy">
-        <p class="eyebrow" data-i18n="home.packagingEyebrow">Packaging details</p>
-        <h2 id="craft-title" data-i18n="home.packagingTitle">The bottle, clearly</h2>
-        <p data-i18n="home.packagingText">Clear glass keeps the liquid visible. The wooden cap adds warmth. The printed label gives each bottle its own character.</p>
-        <p class="quiet" data-i18n="home.packagingQuiet">There is no online checkout here. Use WhatsApp to ask about a fragrance, confirm the current batch and arrange an order with the brand.</p>
-      </div>
+      <p class="catalogue-empty" data-catalogue-empty hidden>No fragrances match this search.</p>
     </section>
   </main>
 
@@ -154,11 +114,11 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
         <div class="product-dialog-copy">
           <p class="eyebrow" data-i18n="home.detailsEyebrow">Fragrance details</p>
           <h2 id="product-dialog-title" data-dialog-name></h2>
-          <p data-dialog-description></p>
+          <p class="detail-price" data-dialog-price><del data-dialog-original></del><span data-dialog-sale></span></p>
           <dl class="product-facts">
-            <div><dt data-i18n="home.size">Size</dt><dd data-dialog-size></dd></div>
-            <div><dt data-i18n="home.profile">Scent profile</dt><dd data-dialog-notes></dd></div>
-            <div><dt data-i18n="home.composition">Composition</dt><dd data-dialog-composition></dd></div>
+            <div data-dialog-size-row><dt data-i18n="home.size">Size</dt><dd data-dialog-size></dd></div>
+            <div data-dialog-inspired-row><dt data-i18n="home.inspiredBy">Inspired by</dt><dd data-dialog-inspired></dd></div>
+            <div data-dialog-notes-row><dt data-i18n="home.profile">Scent profile</dt><dd data-dialog-notes></dd></div>
           </dl>
           <button class="dialog-add" type="button" data-dialog-add><span data-i18n="home.add">Add to cart</span></button>
         </div>
@@ -178,22 +138,14 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       <p class="cart-empty" data-i18n="home.cartEmpty">Your cart is empty. Add a fragrance to begin.</p>
     </div>
     <div class="cart-panel-foot">
-      <p class="cart-note" data-i18n="home.cartNote">No prices are shown yet. WhatsApp is used to confirm the current batch, cost and delivery.</p>
+      <p class="cart-note" data-i18n="home.cartNote">Confirm current price, availability and delivery on WhatsApp.</p>
       <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.send">Send cart to WhatsApp</span> <span aria-hidden="true">↗</span></a>
       <button class="cart-clear" type="button" data-cart-clear><span data-i18n="home.clear">Clear cart</span></button>
     </div>
   </aside>
   <button class="cart-scrim" type="button" data-cart-close aria-label="Close cart"></button>
 
-  <footer>
-    <a class="brand-lockup" href="#top">
-      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
-      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
-    </a>
-    <p data-i18n="footer.tagline">Fragrance, held in nature.</p>
-    <nav aria-label="Footer links"><a href={withBase("/contact/")}><span data-i18n="footer.contact">Contact</span></a><a href={withBase("/testimonials/")}><span data-i18n="footer.notes">Customer notes</span></a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="footer.shop">Shop on WhatsApp</span></a><a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a><a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a></nav>
-    <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
-  </footer>
+  <SiteFooter />
 </BaseLayout>
 
 <script type="application/json" id="catalogue-data" is:inline set:html={catalogueJson}></script>
@@ -205,10 +157,11 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     name: string;
     image?: string;
     imageAlt?: string;
-    description: string;
+    inspiredBy?: string;
     notes: string[];
-    composition: string;
     size?: string;
+    price?: number;
+    originalPrice?: number;
   };
 
   const dataNode = document.querySelector<HTMLScriptElement>("#catalogue-data");
@@ -238,14 +191,22 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   const categoryButtons = [...document.querySelectorAll<HTMLButtonElement>("[data-category-filter]")];
   const categoryItems = [...document.querySelectorAll<HTMLElement>("[data-product-card]")];
   const categoryStatus = document.querySelector<HTMLElement>("[data-category-filter-status]");
+  const searchInput = document.querySelector<HTMLInputElement>("[data-catalogue-search]");
+  const styleFilter = document.querySelector<HTMLSelectElement>("[data-style-filter]");
+  const requestedStyle = new URLSearchParams(window.location.search).get("style");
+  if (styleFilter && requestedStyle && [...styleFilter.options].some((option) => option.value === requestedStyle)) {
+    styleFilter.value = requestedStyle;
+  }
+  const emptyMessage = document.querySelector<HTMLElement>("[data-catalogue-empty]");
   let dialogSlug = "";
 
   const saveCart = () => localStorage.setItem(storageKey, JSON.stringify(cart));
   const cartCount = () => cart.reduce((total, line) => total + line.quantity, 0);
+  const formatPrice = (price: number) => `PKR ${price.toLocaleString("en-PK")}`;
   const messageForCart = () => {
     const lines = cart.map((line) => {
       const product = productBySlug.get(line.slug);
-      return product ? `• ${product.name} × ${line.quantity}` : "";
+      return product ? `• ${product.name} × ${line.quantity}${product.price !== undefined ? ` (${formatPrice(product.price)} each)` : ""}` : "";
     }).filter(Boolean);
     return lines.length
       ? `Hi H&N Scents, I would like to ask about:\n${lines.join("\n")}\n\nPlease confirm the current cost and delivery.`
@@ -272,7 +233,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     cartItems.innerHTML = cart.map((line) => {
       const product = productBySlug.get(line.slug);
       return product ? `<div class="cart-line" data-cart-line="${escapeHtml(product.slug)}">
-        <div><strong>${escapeHtml(product.name)}</strong><span>${escapeHtml(product.size || localized("home.detailsConfirm", "Details to be confirmed"))}</span></div>
+        <div><strong>${escapeHtml(product.name)}</strong><span>${escapeHtml([product.size, product.price !== undefined ? formatPrice(product.price) : ""].filter(Boolean).join(" · "))}</span></div>
         <div class="cart-quantity"><button type="button" data-cart-decrease="${escapeHtml(product.slug)}" aria-label="Remove one ${escapeHtml(product.name)}">−</button><span>${line.quantity}</span><button type="button" data-cart-increase="${escapeHtml(product.slug)}" aria-label="Add one ${escapeHtml(product.name)}">＋</button></div>
       </div>` : "";
     }).join("");
@@ -306,8 +267,13 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   };
 
   const applyCategory = (category: string) => {
+    const query = searchInput?.value.trim().toLocaleLowerCase() || "";
     const visibleCount = categoryItems.filter((item) => {
-      const visible = category === "all" || item.dataset.category === category;
+      const product = productBySlug.get(item.dataset.productSlug || "");
+      const haystack = [product?.name, product?.inspiredBy, product?.notes.join(" ")].filter(Boolean).join(" ").toLocaleLowerCase();
+      const visible = (category === "all" || item.dataset.audience === category)
+        && (styleFilter?.value === "all" || item.dataset.category === styleFilter?.value)
+        && haystack.includes(query);
       item.hidden = !visible;
       return visible;
     }).length;
@@ -316,13 +282,26 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
     });
-    if (categoryStatus) {
-      const fallback = category === "all"
-        ? "Showing all six references."
-        : `${visibleCount} ${visibleCount === 1 ? "reference" : "references"} in this style.`;
-      categoryStatus.textContent = localized(category === "all" ? "home.categoryStatusAll" : "home.categoryStatusFiltered", fallback)
-        .replace("{count}", String(visibleCount));
+    if (emptyMessage) {
+      emptyMessage.hidden = visibleCount > 0;
+      emptyMessage.textContent = query
+        ? localized("home.searchEmpty", "No fragrances match this search.")
+        : category !== "all"
+          ? localized("home.audiencePending", "This category is being confirmed.")
+          : localized("home.searchEmpty", "No fragrances match this search.");
     }
+    if (categoryStatus) categoryStatus.textContent = `${visibleCount} ${visibleCount === 1 ? "fragrance" : "fragrances"} shown.`;
+  };
+
+  const localizeCardActions = () => {
+    categoryItems.forEach((item) => {
+      const name = productBySlug.get(item.dataset.productSlug || "")?.name;
+      if (!name) return;
+      const add = item.querySelector<HTMLButtonElement>("[data-add-to-cart]");
+      const ask = item.querySelector<HTMLAnchorElement>(".catalogue-ask");
+      if (add) add.setAttribute("aria-label", `${localized("home.add", "Add to cart")}: ${name}`);
+      if (ask) ask.setAttribute("aria-label", `${localized("home.ask", "Ask on WhatsApp")}: ${name}`);
+    });
   };
 
   document.querySelectorAll<HTMLElement>("[data-cart-open]").forEach((button) => button.addEventListener("click", () => setCartOpen(true)));
@@ -339,6 +318,14 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   });
 
   categoryButtons.forEach((button) => button.addEventListener("click", () => applyCategory(button.dataset.categoryFilter || "all")));
+  styleFilter?.addEventListener("change", () => {
+    const active = categoryButtons.find((button) => button.classList.contains("is-active"));
+    applyCategory(active?.dataset.categoryFilter || "all");
+  });
+  searchInput?.addEventListener("input", () => {
+    const active = categoryButtons.find((button) => button.classList.contains("is-active"));
+    applyCategory(active?.dataset.categoryFilter || "all");
+  });
 
   const openDetails = (slug: string) => {
     const product = productBySlug.get(slug);
@@ -347,10 +334,20 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     const image = dialog.querySelector<HTMLImageElement>("[data-dialog-image]");
     if (image) { image.src = product.image || ""; image.alt = product.imageAlt || product.name; }
     dialog.querySelector<HTMLElement>("[data-dialog-name]")!.textContent = product.name;
-    dialog.querySelector<HTMLElement>("[data-dialog-description]")!.textContent = product.description;
-    dialog.querySelector<HTMLElement>("[data-dialog-size]")!.textContent = product.size || localized("home.detailsConfirm", "Details to be confirmed");
+    const price = dialog.querySelector<HTMLElement>("[data-dialog-price]");
+    if (price) price.hidden = product.price === undefined;
+    const original = dialog.querySelector<HTMLElement>("[data-dialog-original]");
+    if (original) { original.hidden = product.originalPrice === undefined; original.textContent = product.originalPrice !== undefined ? formatPrice(product.originalPrice) : ""; }
+    dialog.querySelector<HTMLElement>("[data-dialog-sale]")!.textContent = product.price !== undefined ? formatPrice(product.price) : "";
+    const sizeRow = dialog.querySelector<HTMLElement>("[data-dialog-size-row]");
+    if (sizeRow) sizeRow.hidden = !product.size;
+    dialog.querySelector<HTMLElement>("[data-dialog-size]")!.textContent = product.size || "";
+    const inspiredRow = dialog.querySelector<HTMLElement>("[data-dialog-inspired-row]");
+    if (inspiredRow) inspiredRow.hidden = !product.inspiredBy;
+    dialog.querySelector<HTMLElement>("[data-dialog-inspired]")!.textContent = product.inspiredBy || "";
+    const notesRow = dialog.querySelector<HTMLElement>("[data-dialog-notes-row]");
+    if (notesRow) notesRow.hidden = !product.notes.length;
     dialog.querySelector<HTMLElement>("[data-dialog-notes]")!.textContent = product.notes.join(" · ");
-    dialog.querySelector<HTMLElement>("[data-dialog-composition]")!.textContent = product.composition;
     dialog.showModal();
   };
 
@@ -361,9 +358,11 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
 
   window.addEventListener("hn:localechange", () => {
     renderCart();
+    localizeCardActions();
     const active = categoryButtons.find((button) => button.classList.contains("is-active"));
     applyCategory(active?.dataset.categoryFilter || "all");
   });
   renderCart();
+  localizeCardActions();
   applyCategory("all");
 </script>

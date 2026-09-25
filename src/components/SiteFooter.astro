@@ -1,0 +1,13 @@
+---
+import { withBase } from "../data/site";
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-meta">
+      <a href={withBase("/contact/")} data-i18n="footer.contact">Contact</a>
+      <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
+    </div>
+    <span class="footer-social" role="img" aria-label="Instagram profile coming soon" title="Instagram profile coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle class="instagram-dot" cx="17.5" cy="6.5" r="1"></circle></svg></span>
+  </div>
+</footer>

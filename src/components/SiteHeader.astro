@@ -10,24 +10,50 @@ const { showCart = false } = Astro.props;
 ---
 
 <header class="site-header" data-site-header>
+  <div class="header-primary-links">
+    <a href={withBase("/contact/")} data-i18n="nav.contact">Contact</a>
+    <details class="nav-categories" data-nav-categories>
+      <summary data-i18n="nav.categories">Categories</summary>
+      <div class="nav-category-popover">
+        <a class="nav-category-all" href={withBase("/#collection")} data-i18n="nav.shopAll">Shop all</a>
+        <div class="nav-category-grid">
+          <a href={withBase("/?style=fresh#collection")}>
+            <img src={withBase("/batches/desire.png")} alt="" width="720" height="1289" loading="lazy" />
+            <span data-i18n="home.categoryFresh">Fresh</span>
+          </a>
+          <a href={withBase("/?style=woody#collection")}>
+            <img src={withBase("/batches/billion.png")} alt="" width="720" height="1289" loading="lazy" />
+            <span data-i18n="home.categoryWoody">Woody</span>
+          </a>
+          <a href={withBase("/?style=oud#collection")}>
+            <img src={withBase("/batches/gilded.png")} alt="" width="720" height="1289" loading="lazy" />
+            <span data-i18n="home.categoryOud">Oud</span>
+          </a>
+        </div>
+      </div>
+    </details>
+  </div>
   <a class="brand-lockup" href={withBase("/")} aria-label="Heaven and Nature home">
     <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
-    <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
+    <span class="wordmark">Heaven <i>&amp;</i> <span class="wordmark-script">Nature</span></span>
   </a>
 
-  <button class="menu-trigger" type="button" aria-controls="site-navigation" aria-expanded="false" data-menu-trigger>
-    <span data-menu-label data-i18n="nav.menu">Menu</span>
-    <span class="menu-mark" aria-hidden="true"><i></i><i></i></span>
-  </button>
+  <div class="header-actions">
+    {showCart && <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false"><span data-i18n="nav.cart">Cart</span> <span data-cart-count>0</span></button>}
+    <button class="menu-trigger" type="button" aria-controls="site-navigation" aria-expanded="false" data-menu-trigger>
+      <span data-menu-label data-i18n="nav.menu">Menu</span>
+      <span class="menu-mark" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
 
   <nav class="site-nav" id="site-navigation" aria-label="Main navigation" data-site-nav>
     <a href={withBase("/")}><span data-i18n="nav.home">Home</span></a>
     <a href={withBase("/#collection")}><span data-i18n="nav.bottles">Fragrances</span></a>
-    <a href={withBase("/#story")}><span data-i18n="nav.packaging">Packaging</span></a>
     <a href={withBase("/contact/")}><span data-i18n="nav.contact">Contact</span></a>
     <a href={withBase("/testimonials/")}><span data-i18n="nav.reviews">Reviews</span></a>
     <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="nav.shop">Shop on WhatsApp</span></a>
-    {showCart && <button class="cart-trigger" type="button" data-cart-open aria-controls="cart-panel" aria-expanded="false"><span data-i18n="nav.cart">Cart</span> <span data-cart-count>0</span></button>}
+    <a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a>
+    <a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a>
     <label class="language-picker">
       <span class="sr-only" data-i18n="language.label">Language</span>
       <select data-language-select aria-label="Language" data-i18n-aria-label="language.label">
@@ -46,10 +72,12 @@ const { showCart = false } = Astro.props;
     const trigger = header.querySelector<HTMLButtonElement>("[data-menu-trigger]");
     const label = header.querySelector<HTMLElement>("[data-menu-label]");
     const nav = header.querySelector<HTMLElement>("[data-site-nav]");
+    const categories = header.querySelector<HTMLDetailsElement>("[data-nav-categories]");
     if (!trigger || !nav) return;
 
     const closeMenu = (returnFocus = false) => {
       nav.classList.remove("is-open");
+      if (categories) categories.open = false;
       trigger.setAttribute("aria-expanded", "false");
       if (label) label.textContent = i18n()?.get("nav.menu", "Menu") || "Menu";
       if (returnFocus) trigger.focus();
@@ -57,11 +85,15 @@ const { showCart = false } = Astro.props;
 
     trigger.addEventListener("click", () => {
       const opening = trigger.getAttribute("aria-expanded") !== "true";
+      if (opening && categories) categories.open = false;
       nav.classList.toggle("is-open", opening);
       trigger.setAttribute("aria-expanded", String(opening));
       if (label) label.textContent = opening
         ? (i18n()?.get("nav.close", "Close") || "Close")
         : (i18n()?.get("nav.menu", "Menu") || "Menu");
+    });
+    categories?.querySelector("summary")?.addEventListener("click", () => {
+      if (nav.classList.contains("is-open")) closeMenu();
     });
 
     nav.addEventListener("click", (event) => {
@@ -69,7 +101,12 @@ const { showCart = false } = Astro.props;
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && nav.classList.contains("is-open")) closeMenu(true);
+      if (event.key !== "Escape") return;
+      if (categories?.open) { categories.open = false; categories.querySelector("summary")?.focus(); }
+      if (nav.classList.contains("is-open")) closeMenu(true);
+    });
+    document.addEventListener("click", (event) => {
+      if (categories?.open && !categories.contains(event.target as Node)) categories.open = false;
     });
   });
 </script>

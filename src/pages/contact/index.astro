@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { absoluteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../../data/site";
 
@@ -31,29 +32,17 @@ const contactSchema = {
   <SiteHeader />
 
   <main id="main" class="contact-page">
-    <div class="contact-heading">
-      <p class="eyebrow" data-i18n="contact.eyebrow">A direct line to the brand</p>
-      <h1 data-i18n="contact.title">Tell us what you’re looking for</h1>
-      <p data-i18n="contact.intro">Ask about a bottle, a new batch, gift presentation or delivery. We’ll take the conversation to WhatsApp and confirm what is currently available.</p>
-    </div>
+    <section class="inner-hero contact-hero" aria-labelledby="contact-title">
+      <div class="inner-hero-copy">
+        <h1 id="contact-title" data-i18n="footer.contact">Contact</h1>
+        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">+92 318 01946060 <span aria-hidden="true">↗</span></a>
+        <a class="contact-call" href="tel:+9231801946060" data-i18n="contact.call">Call this number</a>
+      </div>
+      <figure class="inner-hero-image"><img src={withBase("/batches/presentation-box.jpg")} alt="H&N Scents presentation box with perfume packaging." width="1200" height="1200" fetchpriority="high" decoding="async" /></figure>
+    </section>
 
     <div class="contact-layout">
-      <div class="contact-details">
-        <p class="contact-kicker" data-i18n="contact.good">Good to know</p>
-        <p class="contact-highlight" data-i18n="contact.delivery">Delivery throughout Pakistan.</p>
-        <p class="contact-muted" data-i18n="contact.noCheckout">Prices and availability are confirmed directly with the brand. There is no payment or account checkout on this site.</p>
-        <div class="contact-languages" aria-label="Supported enquiry languages">
-          <p class="contact-kicker" data-i18n="contact.languageLabel">Languages</p>
-          <p data-i18n="contact.languages">English · Urdu · Pashto · Punjabi · Sindhi</p>
-        </div>
-        <div class="contact-channel">
-          <p class="contact-kicker" data-i18n="contact.whatsappLabel">WhatsApp</p>
-          <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span class="contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="presentation"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z"></path><path d="M9 8.5c.2-.4.4-.5.8-.5h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4-.1.6l-.5.6c.5 1 1.2 1.6 2.3 2.1l.6-.5c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.5v.5c0 .4-.2.6-.5.8-.5.2-1.2.3-1.8.1-2.5-.7-4.8-3-5.5-5.5-.2-.7-.1-1.3.1-1.8Z"></path></svg></span>+92 318 01946060 <span aria-hidden="true">↗</span></a>
-          <p class="contact-response" data-i18n="contact.response">Send the scent you’re considering, your city and any question. We’ll confirm the current batch, price and delivery directly.</p>
-          <a class="contact-call" href="tel:+9231801946060" data-i18n="contact.call">Call this number</a>
-        </div>
-      </div>
-
+      <p class="contact-form-intro" data-i18n="contact.response">Send the scent you’re considering, your city and any question. We’ll confirm the current batch, price and delivery directly.</p>
       <form class="contact-form" id="contact-form">
         <label for="contact-name"><span data-i18n="contact.name">Your name</span> <span data-i18n="contact.optional">optional</span></label>
         <input id="contact-name" name="name" autocomplete="name" />
@@ -76,15 +65,7 @@ const contactSchema = {
     </div>
   </main>
 
-  <footer>
-    <a class="brand-lockup" href={withBase("/")}>
-      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
-      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
-    </a>
-    <p data-i18n="footer.tagline">Fragrance, held in nature.</p>
-    <nav aria-label="Footer links"><a href={withBase("/contact/")}><span data-i18n="footer.contact">Contact</span></a><a href={withBase("/testimonials/")}><span data-i18n="footer.notes">Customer notes</span></a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="footer.shop">Shop on WhatsApp</span></a><a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a><a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a></nav>
-    <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
-  </footer>
+  <SiteFooter />
 </BaseLayout>
 
 <script is:inline define:vars={{ whatsappBaseUrl }}>

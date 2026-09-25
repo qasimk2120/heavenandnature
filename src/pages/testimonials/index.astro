@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { absoluteUrl, whatsappUrl, withBase } from "../../data/site";
 
@@ -25,9 +26,7 @@ const pageSchema = {
 
   <main id="main" class="notes-page">
     <div class="notes-heading">
-      <p class="eyebrow" data-i18n="notes.eyebrow">From the people who wear it</p>
       <h1 data-i18n="notes.title">Customer notes</h1>
-      <p data-i18n="notes.intro">We’re gathering the first approved WhatsApp and Instagram notes here. Each one will be shown with its source and the scent it refers to, once confirmed.</p>
     </div>
 
     <div class="notes-gallery" data-notes-carousel aria-label="H&N Scents collection imagery">
@@ -37,10 +36,10 @@ const pageSchema = {
             <img src={withBase("/batches/collection-flat-lay.jpg")} alt="H&N Scents bottles arranged around the presentation box." width="1200" height="1500" loading="eager" decoding="async" />
           </figure>
           <figure class="notes-slide" data-carousel-slide>
-            <img src={withBase("/batches/pacific-chill-258.jpg")} alt="Pacific Chill 258 bottle with a pale blue label." width="900" height="972" loading="eager" decoding="async" />
+            <img src={withBase("/batches/nocturne.png")} alt="Nocturne perfume in an open H&N Scents gift box." width="1599" height="1066" loading="eager" decoding="async" />
           </figure>
           <figure class="notes-slide" data-carousel-slide>
-            <img src={withBase("/batches/oud-satin-mood-269.jpg")} alt="Oud Satin Mood 269 bottle with a deep plum label." width="900" height="972" loading="eager" decoding="async" />
+            <img src={withBase("/batches/gilded.png")} alt="Gilded perfume with a wooden cap beside its H&N Scents box." width="720" height="1289" loading="eager" decoding="async" />
           </figure>
         </div>
       </div>
@@ -55,38 +54,13 @@ const pageSchema = {
       </div>
     </div>
 
-    <div class="notes-ledger" aria-label="Customer review sources">
-      <section class="notes-source" aria-labelledby="whatsapp-notes-title">
-        <p class="notes-source-label"><span class="notes-source-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19.7 4.3A9.8 9.8 0 0 0 3.4 16.2L2.5 21.5l5.4-1.4A9.8 9.8 0 1 0 19.7 4.3Z"/><path d="M8.2 7.8c.2-.4.5-.4.8-.4h.6c.2 0 .4.1.5.4l.8 1.8c.1.2.1.4-.1.6l-.6.7c.7 1.2 1.7 2.1 3 2.7l.6-.6c.2-.2.4-.2.6-.1l1.8.8c.3.1.4.3.4.6v.6c0 .3-.1.6-.4.8-.4.3-1 .4-1.5.3-2.2-.5-4.1-1.6-5.6-3.2-1.6-1.5-2.7-3.4-3.2-5.6-.1-.5 0-1.1.3-1.5Z"/></svg></span><span data-i18n="notes.whatsappLabel">01 · WhatsApp</span></p>
-        <h2 id="whatsapp-notes-title" data-i18n="notes.whatsappTitle">The messages people send us</h2>
-        <p data-i18n="notes.whatsappBody">Approved screenshots or wording will be framed here with the product name and date, keeping the customer’s voice intact.</p>
-        <p class="notes-pending" data-i18n="notes.pending">Reviews will appear here after the original message or approved wording is supplied.</p>
-      </section>
-
-      <section class="notes-source" aria-labelledby="instagram-notes-title">
-        <p class="notes-source-label"><span class="notes-source-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg></span><span data-i18n="notes.instagramLabel">02 · Instagram</span></p>
-        <h2 id="instagram-notes-title" data-i18n="notes.instagramTitle">Notes from the feed</h2>
-        <p data-i18n="notes.instagramBody">Instagram mentions and story replies will be credited to the handle only when permission and the final wording are confirmed.</p>
-        <p class="notes-pending" data-i18n="notes.pending">Reviews will appear here after the original post, story or approved wording is supplied.</p>
-      </section>
-    </div>
-
-    <div class="notes-actions">
-      <p class="eyebrow" data-i18n="notes.actionEyebrow">Have a note to share?</p>
-      <p data-i18n="notes.actionBody">Send the original WhatsApp message or Instagram screenshot. We’ll confirm how you’d like it credited before it goes live.</p>
+    <div class="notes-quiet">
+      <p data-i18n="notes.pending">Reviews will appear here after the original message or approved wording is supplied.</p>
       <a class="text-link" href={whatsappUrl("Hi H&N Scents, I would like to share a customer review.")} target="_blank" rel="noreferrer"><span data-i18n="notes.share">Share a review</span> <span aria-hidden="true">↗</span></a>
     </div>
   </main>
 
-  <footer>
-    <a class="brand-lockup" href={withBase("/")}>
-      <img src={withBase("/brand/Logo.jpeg")} alt="" width="38" height="38" />
-      <span class="wordmark">Heaven <i>&amp;</i> Nature</span>
-    </a>
-    <p data-i18n="footer.tagline">Fragrance, held in nature.</p>
-    <nav aria-label="Footer links"><a href={withBase("/contact/")}><span data-i18n="footer.contact">Contact</span></a><a href={withBase("/testimonials/")}><span data-i18n="footer.notes">Customer notes</span></a><a href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="footer.shop">Shop on WhatsApp</span></a><a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a><a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a></nav>
-    <p>© {new Date().getFullYear()} Heaven &amp; Nature</p>
-  </footer>
+  <SiteFooter />
 </BaseLayout>
 
 <script>

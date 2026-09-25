@@ -1,18 +1,20 @@
 export type BatchStatus = "catalogue" | "upcoming" | "available" | "sold-out";
 export type BatchCategory = "fresh" | "floral" | "woody" | "oud";
+export type BatchAudience = "unisex" | "male" | "female";
 
 export type Batch = {
   slug: string;
   name: string;
   status: BatchStatus;
-  category: BatchCategory;
-  collection?: string;
+  category?: BatchCategory;
+  audience?: BatchAudience;
   shortDescription: string;
   description: string;
+  inspiredBy?: string;
   notes: string[];
-  composition: string;
   size?: string;
   price?: number;
+  originalPrice?: number;
   currency?: "PKR";
   sku?: string;
   image?: string;
@@ -20,92 +22,67 @@ export type Batch = {
   published: boolean;
 };
 
-// These visual entries are based on owner-supplied product photography. They
-// deliberately stay unpublished until the owner confirms every release detail,
-// availability and order path.
+// Prices and SKUs come from data/HN_Scents_Price_List (1).xlsx, rows 6–11.
+// Stock and release status are unconfirmed, so standalone product pages remain
+// unpublished. Audience and scent styles use only clear supplied evidence.
 export const batches: Batch[] = [
   {
-    slug: "ganymede-289",
-    name: "Ganymede 289",
-    status: "catalogue",
-    category: "woody",
-    shortDescription: "A stone-grey label, clear glass and a warm wooden cap.",
-    description: "Ganymede 289 from the H&N Scents product photography collection.",
-    notes: ["Mineral woods", "Saffron", "Suede"],
-    composition: "An inspired mineral-woody profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/ganymede-289.jpg",
-    imageAlt: "Ganymede 289 perfume bottle in an open cream presentation box.",
+    slug: "gilded", name: "Gilded", status: "catalogue", category: "oud",
+    shortDescription: "Gilded by H&N Scents.",
+    description: "Gilded by H&N Scents, inspired by Golden Oud.",
+    inspiredBy: "Golden Oud", notes: ["Saffron", "Black pepper", "Oud"],
+    size: "50ml", price: 4299, originalPrice: 4699, currency: "PKR", sku: "HN-001",
+    image: "/batches/gilded.png",
+    imageAlt: "Gilded perfume bottle with wooden cap beside its H&N Scents box.",
     published: false
   },
   {
-    slug: "les-sables-roses-237",
-    name: "Les Sables Roses 237",
-    status: "catalogue",
-    category: "floral",
-    shortDescription: "A rose-toned bottle presented against soft petals and linen.",
-    description: "Les Sables Roses 237 from the H&N Scents product photography collection.",
-    notes: ["Rose", "Amber", "Soft spice"],
-    composition: "An inspired rose-amber profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/les-sables-roses-237.jpg",
-    imageAlt: "Les Sables Roses 237 perfume bottle in an open cream presentation box with flowers.",
+    slug: "desire", name: "Desire", status: "catalogue", category: "fresh",
+    shortDescription: "Desire by H&N Scents.",
+    description: "Desire by H&N Scents, inspired by Dunhill Desire Red.",
+    inspiredBy: "Dunhill Desire Red", notes: ["Apple", "Neroli", "Teak wood"],
+    size: "50ml", price: 3750, originalPrice: 4499, currency: "PKR", sku: "HN-002",
+    image: "/batches/desire.png",
+    imageAlt: "Desire perfume bottle with wooden cap beside its H&N Scents box.",
     published: false
   },
   {
-    slug: "layton-263",
-    name: "Layton 263",
-    status: "catalogue",
-    category: "woody",
-    shortDescription: "Amber glass and a black label grounded by a deep walnut cap.",
-    description: "Layton 263 from the H&N Scents product photography collection.",
-    notes: ["Apple", "Lavender", "Vanilla"],
-    composition: "An inspired aromatic-vanilla profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/layton-263.jpg",
-    imageAlt: "Layton 263 perfume bottle in an open cream presentation box.",
+    slug: "billion", name: "Billion", status: "catalogue", category: "woody",
+    shortDescription: "Billion by H&N Scents.",
+    description: "Billion by H&N Scents, inspired by One Million.",
+    inspiredBy: "One Million", notes: ["Blood mandarin", "Cinnamon", "Leather"],
+    size: "50ml", price: 3850, originalPrice: 4499, currency: "PKR", sku: "HN-003",
+    image: "/batches/billion.png",
+    imageAlt: "Billion perfume bottle with wooden cap beside its H&N Scents box.",
     published: false
   },
   {
-    slug: "gris-dior-258",
-    name: "Gris Dior 258",
-    status: "catalogue",
-    category: "floral",
-    shortDescription: "A quiet silver-grey label set into transparent glass.",
-    description: "Gris Dior 258 from the H&N Scents product photography collection.",
-    notes: ["Rose", "Moss", "Amber"],
-    composition: "An inspired chypre-rose profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/gris-dior-258.jpg",
-    imageAlt: "Gris Dior 258 perfume bottle in an open cream presentation box.",
+    slug: "nocturne", name: "Nocturne", status: "catalogue",
+    shortDescription: "Nocturne by H&N Scents.",
+    description: "Nocturne by H&N Scents, inspired by Black Opium.",
+    inspiredBy: "Black Opium", notes: [],
+    size: "50ml", price: 3850, originalPrice: 4499, currency: "PKR", sku: "HN-004",
+    image: "/batches/nocturne.png",
+    imageAlt: "Nocturne perfume bottle with wooden cap in an open H&N Scents gift box.",
     published: false
   },
   {
-    slug: "oud-satin-mood-269",
-    name: "Oud Satin Mood 269",
-    status: "catalogue",
-    category: "oud",
-    shortDescription: "A plum label and sculpted wood cap give the bottle its night-time weight.",
-    description: "Oud Satin Mood 269 from the H&N Scents product photography collection.",
-    notes: ["Violet", "Rose", "Oud"],
-    composition: "An inspired floral-oud profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/oud-satin-mood-269.jpg",
-    imageAlt: "Oud Satin Mood 269 perfume bottle in an open cream presentation box.",
+    slug: "victor", name: "Victor", status: "catalogue", category: "fresh",
+    shortDescription: "Victor by H&N Scents.",
+    description: "Victor by H&N Scents, inspired by Invictus.",
+    inspiredBy: "Invictus", notes: ["Sea notes", "Grapefruit", "Ambergris"],
+    size: "50ml", price: 3850, originalPrice: 4499, currency: "PKR", sku: "HN-005",
+    image: "/batches/victor.png",
+    imageAlt: "Victor perfume bottle with wooden cap beside its H&N Scents box.",
     published: false
   },
   {
-    slug: "pacific-chill-258",
-    name: "Pacific Chill 258",
-    status: "catalogue",
-    category: "fresh",
-    shortDescription: "An airy blue label set against a pale, botanical presentation.",
-    description: "Pacific Chill 258 from the H&N Scents product photography collection.",
-    notes: ["Citrus", "Blackcurrant", "Basil"],
-    composition: "An inspired fresh-citrus profile. Final formula details are confirmed by the brand on request.",
-    size: "50ml",
-    image: "/batches/pacific-chill-258.jpg",
-    imageAlt: "Pacific Chill 258 perfume bottle in an open cream presentation box.",
+    slug: "office-men-t", name: "Office Men T", status: "catalogue", audience: "male",
+    shortDescription: "Office Men T by H&N Scents.",
+    description: "Office Men T, 50% Oil Edition by H&N Scents.",
+    notes: [], price: 4299, originalPrice: 4499, currency: "PKR", sku: "HN-006",
+    image: "/batches/office-men-t.jpg",
+    imageAlt: "Office Men T perfume bottle with wooden cap in an open H&N Scents presentation box.",
     published: false
   }
 ];
