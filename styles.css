@@ -1529,6 +1529,8 @@ body { font-family: var(--editorial); }
 .nav-categories > summary,
 .site-nav > a,
 .site-footer .footer-meta > a,
+.header-actions .cart-trigger,
+.header-actions .menu-trigger,
 .contact-page .contact-phone,
 .contact-page .contact-call,
 .text-link {
@@ -1540,6 +1542,8 @@ body { font-family: var(--editorial); }
 .nav-categories > summary::after,
 .site-nav > a::after,
 .site-footer .footer-meta > a::after,
+.header-actions .cart-trigger::after,
+.header-actions .menu-trigger::after,
 .contact-page .contact-phone::after,
 .contact-page .contact-call::after,
 .text-link::after {
@@ -1561,11 +1565,18 @@ body { font-family: var(--editorial); }
 .nav-categories[open] > summary::after,
 .site-nav > a:hover::after,
 .site-footer .footer-meta > a:hover::after,
+.header-actions .cart-trigger:hover::after,
+.header-actions .menu-trigger:hover::after,
 .contact-page .contact-phone:hover::after,
 .contact-page .contact-call:hover::after,
 .text-link:hover::after { opacity: .95; transform: scaleX(1); }
 .nav-categories > summary { display: inline-block; }
 .contact-page .contact-call { display: inline-block; }
+.header-actions .cart-trigger,
+.header-actions .menu-trigger { color: var(--cedar); }
+.header-actions .cart-trigger:hover,
+.header-actions .menu-trigger:hover { color: var(--wood-dark); }
+.header-actions .menu-trigger::after { bottom: .65rem; }
 
 .category-filter { position: relative; border-bottom: 0; }
 .category-filter::after {
