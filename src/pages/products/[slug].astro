@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { batches } from "../../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, withBase } from "../../data/site";
@@ -33,7 +31,6 @@ const productSchema = batch.price !== undefined && batch.image && configuredSite
 ---
 
 <BaseLayout title={`${batch.name} | ${site.name}`} description={batch.description} path={`/products/${batch.slug}/`} image={batch.image}>
-  <SiteHeader />
   {productSchema && <StructuredData data={productSchema} />}
   <main id="main" class="product-page">
     <a class="product-back text-link" href={withBase("/")}><span data-i18n="product.back">Back to collection</span></a>
@@ -51,5 +48,4 @@ const productSchema = batch.price !== undefined && batch.image && configuredSite
       </div>
     </article>
   </main>
-  <SiteFooter />
 </BaseLayout>

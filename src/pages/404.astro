@@ -1,12 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
 import { withBase } from "../data/site";
 ---
 
 <BaseLayout title="Page not found | Heaven & Nature" description="The requested Heaven and Nature page could not be found.">
-  <SiteHeader />
   <main id="main" class="not-found">
     <div class="not-found-copy">
       <p class="not-found-code" data-i18n="notFound.eyebrow">404</p>
@@ -15,5 +12,4 @@ import { withBase } from "../data/site";
     </div>
     <img src={withBase("/batches/collection-flat-lay.jpg")} alt="Heaven & Nature fragrances" width="1200" height="1500" loading="eager" decoding="async" />
   </main>
-  <SiteFooter />
 </BaseLayout>

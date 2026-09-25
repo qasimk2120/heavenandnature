@@ -1,12 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import { withBase } from "../../data/site";
 ---
 
 <BaseLayout title="Privacy | Heaven & Nature" description="Privacy information for the Heaven and Nature website." path="/privacy/">
-  <SiteHeader />
   <main id="main" class="legal-page">
     <a class="product-back text-link" href={withBase("/")}><span data-i18n="legal.back">Back to Heaven &amp; Nature</span></a>
     <h1 data-i18n="privacy.eyebrow">Privacy</h1>
@@ -18,5 +15,4 @@ import { withBase } from "../../data/site";
     <h2 data-i18n="privacy.questionsTitle">Questions</h2>
     <p data-i18n="privacy.questionsBody">The website links to WhatsApp for product questions and ordering. WhatsApp handles that conversation under its own privacy terms.</p>
   </main>
-  <SiteFooter />
 </BaseLayout>

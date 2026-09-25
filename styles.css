@@ -1662,3 +1662,25 @@ body { font-family: var(--editorial); }
   .product-page { width: min(1400px, calc(100% - 2rem)); }
   .not-found img { height: min(90vw, 480px); }
 }
+
+@media (max-width: 520px) {
+  .contact-page { padding: 1rem 0 3.5rem; }
+  .contact-hero { gap: 1.25rem; }
+  .contact-hero .inner-hero-image img { height: clamp(210px, 70vw, 300px); }
+  .contact-hero .inner-hero-copy h1 { font-size: clamp(3rem, 12vw, 4.5rem); line-height: 1; }
+  .contact-hero .contact-phone { margin-top: .75rem; }
+  .contact-hero .contact-call { margin-top: .65rem; }
+  .contact-layout { margin-top: 2rem; gap: 1.25rem; padding-top: 1.25rem; }
+  .contact-form { width: 100%; max-width: none; gap: .45rem; }
+  .contact-form label { margin-top: .65rem; }
+  .contact-form input, .contact-form select, .contact-form textarea { padding: .7rem 0; }
+  .contact-form textarea { min-height: 8rem; }
+
+  .notes-page { padding: 1.25rem 0 3.5rem; }
+  .notes-heading { padding-bottom: 1.1rem; }
+  .notes-heading h1 { font-size: clamp(2.8rem, 11vw, 4.2rem); line-height: 1; }
+  .notes-gallery { width: 100%; margin-top: 1.2rem; }
+  .notes-carousel-controls { margin-top: .5rem; }
+  .notes-carousel-arrow, .notes-carousel-dots button { min-width: 44px; min-height: 44px; }
+  .notes-quiet { flex-direction: column; gap: .75rem; margin-top: 1.75rem; }
+}

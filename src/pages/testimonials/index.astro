@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { absoluteUrl, whatsappUrl, withBase } from "../../data/site";
 
@@ -21,8 +19,6 @@ const pageSchema = {
   path="/testimonials/"
 >
   <StructuredData data={pageSchema} />
-
-  <SiteHeader />
 
   <main id="main" class="notes-page">
     <div class="notes-heading">
@@ -60,7 +56,6 @@ const pageSchema = {
     </div>
   </main>
 
-  <SiteFooter />
 </BaseLayout>
 
 <script>

@@ -2,19 +2,23 @@
 import "../../styles.css";
 import { absoluteUrl, isDomainConfigured, site, withBase } from "../data/site";
 import { translations } from "../data/i18n";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
   image?: string;
+  showCart?: boolean;
 }
 
 const {
   title = `${site.name} | Fragrance, held in nature`,
   description = site.description,
   path = "/",
-  image = "/og/home-og.jpg"
+  image = "/og/home-og.jpg",
+  showCart = false
 } = Astro.props;
 const canonical = absoluteUrl(path);
 const socialImage = absoluteUrl(image);
@@ -53,7 +57,9 @@ const i18nJson = JSON.stringify(translations).replace(/</g, "\\u003c");
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader showCart={showCart} />
     <slot />
+    <SiteFooter />
     <script type="application/json" id="hn-i18n-data" is:inline set:html={i18nJson}></script>
     <script is:inline>
       (() => {

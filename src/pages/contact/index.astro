@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import StructuredData from "../../components/StructuredData.astro";
 import { absoluteUrl, site, whatsappBaseUrl, whatsappDisplayNumber, whatsappTelephone, whatsappUrl, withBase } from "../../data/site";
 
@@ -28,8 +26,6 @@ const contactSchema = {
   path="/contact/"
 >
   <StructuredData data={contactSchema} />
-
-  <SiteHeader />
 
   <main id="main" class="contact-page">
     <section class="inner-hero contact-hero" aria-labelledby="contact-title">
@@ -65,7 +61,6 @@ const contactSchema = {
     </div>
   </main>
 
-  <SiteFooter />
 </BaseLayout>
 
 <script is:inline define:vars={{ whatsappBaseUrl }}>

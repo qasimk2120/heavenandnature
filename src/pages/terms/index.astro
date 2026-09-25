@@ -1,12 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
 import { withBase } from "../../data/site";
 ---
 
 <BaseLayout title="Terms | Heaven & Nature" description="Terms for using the Heaven and Nature website." path="/terms/">
-  <SiteHeader />
   <main id="main" class="legal-page">
     <a class="product-back text-link" href={withBase("/")}><span data-i18n="legal.back">Back to Heaven &amp; Nature</span></a>
     <h1 data-i18n="terms.eyebrow">Terms</h1>
@@ -18,5 +15,4 @@ import { withBase } from "../../data/site";
     <h2 data-i18n="terms.updatesTitle">Updates</h2>
     <p data-i18n="terms.updatesBody">Ordering details, pricing and delivery terms are confirmed directly with the brand through its official WhatsApp channel.</p>
   </main>
-  <SiteFooter />
 </BaseLayout>

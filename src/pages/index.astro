@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BatchCard from "../components/BatchCard.astro";
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { batches } from "../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../data/site";
@@ -54,9 +52,9 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   description="Explore H&N Scents fragrances, scent profiles and presentation details. Ask about availability and delivery throughout Pakistan on WhatsApp."
   path="/"
   image="/og/home-og.jpg"
+  showCart
 >
   <StructuredData data={[organizationSchema, websiteSchema, catalogueSchema]} />
-  <SiteHeader showCart />
 
   <main id="main" class="home-page">
     <section class="hero" id="top" aria-labelledby="hero-title">
@@ -145,7 +143,6 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   </aside>
   <button class="cart-scrim" type="button" data-cart-close aria-label="Close cart"></button>
 
-  <SiteFooter />
 </BaseLayout>
 
 <script type="application/json" id="catalogue-data" is:inline set:html={catalogueJson}></script>
