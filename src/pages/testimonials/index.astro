@@ -25,9 +25,9 @@ const pageSchema = {
       <h1 data-i18n="notes.title">Customer notes</h1>
     </div>
 
-    <div class="notes-gallery" data-notes-carousel aria-label="H&N Scents collection imagery">
+    <div class="notes-gallery" data-notes-carousel role="region" aria-roledescription="carousel" aria-label="H&N Scents collection imagery">
       <div class="notes-carousel-viewport">
-        <div class="notes-carousel-track" data-carousel-track>
+        <div class="notes-carousel-track" data-carousel-track aria-live="off">
           <figure class="notes-slide" data-carousel-slide>
             <img src={withBase("/batches/collection-flat-lay.jpg")} alt="H&N Scents bottles arranged around the presentation box." width="1200" height="1500" loading="eager" decoding="async" />
           </figure>
@@ -41,10 +41,13 @@ const pageSchema = {
       </div>
       <div class="notes-carousel-controls">
         <button class="notes-carousel-arrow" type="button" data-carousel-prev aria-label="Previous image" data-i18n-aria-label="notes.previous">←</button>
-        <div class="notes-carousel-dots" role="tablist" aria-label="Select image" data-i18n-aria-label="notes.selectImage">
-          <button type="button" role="tab" aria-label="Show image 1" aria-selected="true" data-carousel-dot="0" data-i18n-aria-label="notes.imageOne"></button>
-          <button type="button" role="tab" aria-label="Show image 2" aria-selected="false" data-carousel-dot="1" data-i18n-aria-label="notes.imageTwo"></button>
-          <button type="button" role="tab" aria-label="Show image 3" aria-selected="false" data-carousel-dot="2" data-i18n-aria-label="notes.imageThree"></button>
+        <div class="notes-carousel-center">
+          <div class="notes-carousel-dots" role="tablist" aria-label="Select image" data-i18n-aria-label="notes.selectImage">
+            <button type="button" role="tab" aria-label="Show image 1" aria-selected="true" data-carousel-dot="0" data-i18n-aria-label="notes.imageOne"></button>
+            <button type="button" role="tab" aria-label="Show image 2" aria-selected="false" data-carousel-dot="1" data-i18n-aria-label="notes.imageTwo"></button>
+            <button type="button" role="tab" aria-label="Show image 3" aria-selected="false" data-carousel-dot="2" data-i18n-aria-label="notes.imageThree"></button>
+          </div>
+          <button class="notes-carousel-toggle" type="button" data-carousel-toggle aria-label="Pause carousel" data-i18n-aria-label="notes.pauseCarousel" title="Pause carousel"><span aria-hidden="true" data-carousel-toggle-icon>Ⅱ</span></button>
         </div>
         <button class="notes-carousel-arrow" type="button" data-carousel-next aria-label="Next image" data-i18n-aria-label="notes.next">→</button>
       </div>
@@ -63,7 +66,18 @@ const pageSchema = {
   const track = carousel?.querySelector<HTMLElement>("[data-carousel-track]");
   const slides = carousel ? [...carousel.querySelectorAll<HTMLElement>("[data-carousel-slide]")] : [];
   const dots = carousel ? [...carousel.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]")] : [];
+  const rotationToggle = carousel?.querySelector<HTMLButtonElement>("[data-carousel-toggle]");
+  const rotationIcon = rotationToggle?.querySelector<HTMLElement>("[data-carousel-toggle-icon]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const localized = (key: string, fallback: string) => {
+    const current = (window as Window & { hnI18n?: { get: (key: string, fallback?: string) => string } }).hnI18n;
+    return current?.get(key, fallback) || fallback;
+  };
   let activeSlide = 0;
+  let rotationTimer: number | undefined;
+  let rotationPaused = reducedMotion.matches;
+  let pointerInside = false;
+  let focusInside = false;
 
   const showSlide = (index: number) => {
     if (!track || !slides.length) return;
@@ -72,7 +86,61 @@ const pageSchema = {
     dots.forEach((dot, dotIndex) => dot.setAttribute("aria-selected", String(dotIndex === activeSlide)));
   };
 
-  carousel?.querySelector<HTMLButtonElement>("[data-carousel-prev]")?.addEventListener("click", () => showSlide(activeSlide - 1));
-  carousel?.querySelector<HTMLButtonElement>("[data-carousel-next]")?.addEventListener("click", () => showSlide(activeSlide + 1));
-  dots.forEach((dot) => dot.addEventListener("click", () => showSlide(Number(dot.dataset.carouselDot || 0))));
+  const stopRotation = () => {
+    if (rotationTimer !== undefined) window.clearInterval(rotationTimer);
+    rotationTimer = undefined;
+  };
+
+  const syncRotationControl = () => {
+    if (!rotationToggle || !rotationIcon) return;
+    const paused = rotationPaused || reducedMotion.matches;
+    const label = localized(paused ? "notes.playCarousel" : "notes.pauseCarousel", paused ? "Play carousel" : "Pause carousel");
+    rotationToggle.setAttribute("aria-label", label);
+    rotationToggle.title = label;
+    rotationToggle.disabled = reducedMotion.matches;
+    rotationIcon.textContent = paused ? "▶" : "Ⅱ";
+  };
+
+  const startRotation = () => {
+    stopRotation();
+    if (!carousel || slides.length < 2 || rotationPaused || pointerInside || focusInside || document.hidden || reducedMotion.matches) return;
+    rotationTimer = window.setInterval(() => showSlide(activeSlide + 1), 5500);
+  };
+
+  const pauseForManualChange = () => {
+    rotationPaused = true;
+    stopRotation();
+    syncRotationControl();
+  };
+
+  carousel?.querySelector<HTMLButtonElement>("[data-carousel-prev]")?.addEventListener("click", () => { pauseForManualChange(); showSlide(activeSlide - 1); });
+  carousel?.querySelector<HTMLButtonElement>("[data-carousel-next]")?.addEventListener("click", () => { pauseForManualChange(); showSlide(activeSlide + 1); });
+  dots.forEach((dot) => dot.addEventListener("click", () => { pauseForManualChange(); showSlide(Number(dot.dataset.carouselDot || 0)); }));
+  rotationToggle?.addEventListener("click", () => {
+    if (reducedMotion.matches) return;
+    rotationPaused = !rotationPaused;
+    if (!rotationPaused) {
+      pointerInside = false;
+      focusInside = false;
+    }
+    syncRotationControl();
+    startRotation();
+  });
+  carousel?.addEventListener("mouseenter", () => { pointerInside = true; stopRotation(); });
+  carousel?.addEventListener("mouseleave", () => { pointerInside = false; startRotation(); });
+  carousel?.addEventListener("focusin", () => { focusInside = true; stopRotation(); });
+  carousel?.addEventListener("focusout", (event) => {
+    if (event.relatedTarget instanceof Node && carousel.contains(event.relatedTarget)) return;
+    focusInside = false;
+    startRotation();
+  });
+  document.addEventListener("visibilitychange", startRotation);
+  reducedMotion.addEventListener("change", (event) => {
+    if (event.matches) rotationPaused = true;
+    syncRotationControl();
+    startRotation();
+  });
+  window.addEventListener("hn:localechange", syncRotationControl);
+  syncRotationControl();
+  startRotation();
 </script>

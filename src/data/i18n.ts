@@ -128,6 +128,8 @@ const english = {
   "notes.share": "Share a review",
   "notes.previous": "Previous image",
   "notes.next": "Next image",
+  "notes.pauseCarousel": "Pause carousel",
+  "notes.playCarousel": "Play carousel",
   "notes.selectImage": "Select image",
   "notes.imageOne": "Show image 1",
   "notes.imageTwo": "Show image 2",
