@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BatchCard from "../components/BatchCard.astro";
 import StructuredData from "../components/StructuredData.astro";
+import WhatsAppIcon from "../components/WhatsAppIcon.astro";
 import { batches } from "../data/batches";
 import { absoluteUrl, configuredSiteUrl, site, whatsappBaseUrl, whatsappUrl, withBase } from "../data/site";
 
@@ -137,7 +138,7 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
     </div>
     <div class="cart-panel-foot">
       <p class="cart-note" data-i18n="home.cartNote">Confirm current price, availability and delivery on WhatsApp.</p>
-      <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="home.send">Send cart to WhatsApp</span> <span aria-hidden="true">↗</span></a>
+      <a class="cart-whatsapp" data-cart-whatsapp href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><WhatsAppIcon /><span data-i18n="home.send">Send cart to WhatsApp</span></a>
       <button class="cart-clear" type="button" data-cart-clear><span data-i18n="home.clear">Clear cart</span></button>
     </div>
   </aside>
@@ -362,5 +363,10 @@ const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
   renderCart();
   localizeCardActions();
   applyCategory("all");
+  const requestedProduct = new URLSearchParams(window.location.search).get("product");
+  if (requestedProduct) {
+    openDetails(requestedProduct);
+    window.history.replaceState({}, "", `${window.location.pathname}#collection`);
+  }
   if (new URLSearchParams(window.location.search).get("cart") === "open") setCartOpen(true);
 </script>

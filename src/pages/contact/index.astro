@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import StructuredData from "../../components/StructuredData.astro";
+import WhatsAppIcon from "../../components/WhatsAppIcon.astro";
+import PhoneIcon from "../../components/PhoneIcon.astro";
 import { absoluteUrl, site, whatsappBaseUrl, whatsappDisplayNumber, whatsappTelephone, whatsappUrl, withBase } from "../../data/site";
 
 const contactSchema = {
@@ -31,8 +33,8 @@ const contactSchema = {
     <section class="inner-hero contact-hero" aria-labelledby="contact-title">
       <div class="inner-hero-copy">
         <h1 id="contact-title" data-i18n="footer.contact">Contact</h1>
-        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">{whatsappDisplayNumber} <span aria-hidden="true">↗</span></a>
-        <a class="contact-call" href={`tel:${whatsappTelephone}`} data-i18n="contact.call">Call this number</a>
+        <a class="contact-phone" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer">{whatsappDisplayNumber} <WhatsAppIcon /></a>
+        <a class="contact-call" href={`tel:${whatsappTelephone}`}><PhoneIcon /><span data-i18n="contact.call">Call this number</span></a>
       </div>
       <figure class="inner-hero-image"><img src={withBase("/batches/presentation-box.jpg")} alt="H&N Scents presentation box with perfume packaging." width="1200" height="1200" fetchpriority="high" decoding="async" /></figure>
     </section>
@@ -55,7 +57,7 @@ const contactSchema = {
         <label for="contact-message" data-i18n="contact.message">Message</label>
         <textarea id="contact-message" name="message" rows="5" required placeholder="Which scent or question can we help with?" data-i18n-placeholder="contact.placeholder"></textarea>
 
-        <button class="contact-submit" type="submit"><span data-i18n="contact.open">Open WhatsApp</span> <span aria-hidden="true">↗</span></button>
+        <button class="contact-submit" type="submit"><WhatsAppIcon /><span data-i18n="contact.open">Open WhatsApp</span></button>
         <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
       </form>
     </div>

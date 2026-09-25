@@ -1,6 +1,7 @@
 ---
 import { whatsappUrl, withBase } from "../data/site";
 import { locales } from "../data/i18n";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
 
 interface Props {
   showCart?: boolean;
@@ -15,17 +16,17 @@ const { showCart = false } = Astro.props;
     <details class="nav-categories" data-nav-categories>
       <summary data-i18n="nav.categories">Categories</summary>
       <div class="nav-category-popover">
-        <a class="nav-category-all" href={withBase("/#collection")} data-i18n="nav.shopAll">Shop all</a>
+        <a class="nav-category-all" href={withBase("/fragrances/")} data-i18n="nav.shopAll">Shop all</a>
         <div class="nav-category-grid">
-          <a href={withBase("/?style=fresh#collection")}>
+          <a href={withBase("/fragrances/?style=fresh")}>
             <img src={withBase("/batches/desire.png")} alt="" width="720" height="1289" loading="lazy" />
             <span data-i18n="home.categoryFresh">Fresh</span>
           </a>
-          <a href={withBase("/?style=woody#collection")}>
+          <a href={withBase("/fragrances/?style=woody")}>
             <img src={withBase("/batches/billion.png")} alt="" width="720" height="1289" loading="lazy" />
             <span data-i18n="home.categoryWoody">Woody</span>
           </a>
-          <a href={withBase("/?style=oud#collection")}>
+          <a href={withBase("/fragrances/?style=oud")}>
             <img src={withBase("/batches/gilded.png")} alt="" width="720" height="1289" loading="lazy" />
             <span data-i18n="home.categoryOud">Oud</span>
           </a>
@@ -52,10 +53,10 @@ const { showCart = false } = Astro.props;
 
   <nav class="site-nav" id="site-navigation" aria-label="Main navigation" data-site-nav>
     <a href={withBase("/")}><span data-i18n="nav.home">Home</span></a>
-    <a href={withBase("/#collection")}><span data-i18n="nav.bottles">Fragrances</span></a>
+    <a href={withBase("/fragrances/")}><span data-i18n="nav.bottles">Fragrances</span></a>
     <a href={withBase("/contact/")}><span data-i18n="nav.contact">Contact</span></a>
     <a href={withBase("/testimonials/")}><span data-i18n="nav.reviews">Reviews</span></a>
-    <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><span data-i18n="nav.shop">Shop on WhatsApp</span></a>
+    <a class="shop-link" href={whatsappUrl("Hi H&N Scents, I would like to ask about the collection.")} target="_blank" rel="noreferrer"><WhatsAppIcon /><span data-i18n="nav.shop">Shop on WhatsApp</span></a>
     <a href={withBase("/privacy/")}><span data-i18n="footer.privacy">Privacy</span></a>
     <a href={withBase("/terms/")}><span data-i18n="footer.terms">Terms</span></a>
     <label class="language-picker">

@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BatchCard from "../../components/BatchCard.astro";
+import { batches } from "../../data/batches";
+import { withBase } from "../../data/site";
+
+const catalogue = batches.filter((batch) => batch.status === "catalogue" || batch.status === "available");
+---
+
+<BaseLayout
+  title="Fragrances | Heaven & Nature"
+  description="Browse the full H&N Scents fragrance collection. Filter by audience or scent style, search the catalogue and ask about each fragrance on WhatsApp."
+  path="/fragrances/"
+  image="/og/home-og.jpg"
+>
+  <main id="main" class="home-page fragrances-page">
+    <div class="fragrances-heading">
+      <h1 data-i18n="nav.bottles">Fragrances</h1>
+    </div>
+
+    <section class="collection" aria-label="Fragrance collection">
+      <div class="catalogue-filters" aria-label="Browse fragrances">
+        <div class="category-filter-list" role="group" aria-label="Audience filters">
+          <button class="category-filter is-active" type="button" data-category-filter="all" aria-pressed="true" data-i18n="home.audienceAll">All</button>
+          <button class="category-filter" type="button" data-category-filter="unisex" aria-pressed="false" data-i18n="home.audienceUnisex">Unisex</button>
+          <button class="category-filter" type="button" data-category-filter="male" aria-pressed="false" data-i18n="home.audienceMen">Men</button>
+          <button class="category-filter" type="button" data-category-filter="female" aria-pressed="false" data-i18n="home.audienceWomen">Women</button>
+        </div>
+        <div class="catalogue-tools">
+          <label class="style-filter">
+            <span class="sr-only" data-i18n="home.filterByStyle">Filter by scent style</span>
+            <select data-style-filter aria-label="Filter by scent style" data-i18n-aria-label="home.filterByStyle">
+              <option value="all" data-i18n="home.filter">Filter</option>
+              <option value="fresh" data-i18n="home.categoryFresh">Fresh</option>
+              <option value="floral" data-i18n="home.categoryFloral">Floral</option>
+              <option value="woody" data-i18n="home.categoryWoody">Woody</option>
+              <option value="oud" data-i18n="home.categoryOud">Oud</option>
+            </select>
+          </label>
+          <span class="tool-divider" aria-hidden="true">/</span>
+          <label class="catalogue-search">
+            <span class="sr-only" data-i18n="home.searchPlaceholder">Search fragrances</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg>
+            <input type="search" data-catalogue-search placeholder="Search" aria-label="Search fragrances" data-i18n-placeholder="home.searchShort" data-i18n-aria-label="home.searchPlaceholder" />
+          </label>
+        </div>
+      </div>
+      <p class="sr-only" data-catalogue-status aria-live="polite"></p>
+      <ul class="catalogue-grid">
+        {catalogue.map((batch) => <BatchCard batch={batch} detailsHref={withBase(`/?product=${batch.slug}#collection`)} />)}
+      </ul>
+      <p class="catalogue-empty" data-catalogue-empty hidden>No fragrances match this search.</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-product-card]")];
+  const audienceFilters = [...document.querySelectorAll<HTMLButtonElement>("[data-category-filter]")];
+  const styleFilter = document.querySelector<HTMLSelectElement>("[data-style-filter]");
+  const search = document.querySelector<HTMLInputElement>("[data-catalogue-search]");
+  const emptyState = document.querySelector<HTMLElement>("[data-catalogue-empty]");
+  const status = document.querySelector<HTMLElement>("[data-catalogue-status]");
+  const headerCounts = [...document.querySelectorAll<HTMLElement>("[data-cart-count]")];
+  const requestedStyle = new URLSearchParams(location.search).get("style");
+  if (styleFilter && requestedStyle && [...styleFilter.options].some((option) => option.value === requestedStyle)) styleFilter.value = requestedStyle;
+
+  const renderCards = (audience = audienceFilters.find((button) => button.getAttribute("aria-pressed") === "true")?.dataset.categoryFilter || "all") => {
+    const query = search?.value.trim().toLocaleLowerCase() || "";
+    let visible = 0;
+    for (const card of cards) {
+      const text = `${card.dataset.productSlug || ""} ${card.textContent || ""}`.toLocaleLowerCase();
+      const matches = (audience === "all" || card.dataset.audience === audience)
+        && (!styleFilter || styleFilter.value === "all" || card.dataset.category === styleFilter.value)
+        && text.includes(query);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    audienceFilters.forEach((button) => {
+      const active = button.dataset.categoryFilter === audience;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    if (emptyState) emptyState.hidden = visible > 0;
+    if (status) status.textContent = `${visible} ${visible === 1 ? "fragrance" : "fragrances"} shown.`;
+  };
+
+  audienceFilters.forEach((button) => button.addEventListener("click", () => renderCards(button.dataset.categoryFilter)));
+  styleFilter?.addEventListener("change", () => renderCards());
+  search?.addEventListener("input", () => renderCards());
+
+  document.addEventListener("click", (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLButtonElement>("[data-add-to-cart]");
+    if (!button) return;
+    const slug = button.dataset.addToCart;
+    if (!slug) return;
+    let cart: { slug: string; quantity: number }[] = [];
+    try {
+      const saved = JSON.parse(localStorage.getItem("heaven-and-nature-cart") || "[]");
+      if (Array.isArray(saved)) cart = saved.filter((line) => line && typeof line.slug === "string" && Number.isInteger(line.quantity) && line.quantity > 0);
+    } catch { cart = []; }
+    const existing = cart.find((line) => line.slug === slug);
+    if (existing) existing.quantity += 1;
+    else cart.push({ slug, quantity: 1 });
+    localStorage.setItem("heaven-and-nature-cart", JSON.stringify(cart));
+    const count = cart.reduce((total, line) => total + line.quantity, 0);
+    headerCounts.forEach((node) => { node.textContent = String(count); });
+    const fragranceName = button.closest<HTMLElement>("[data-product-card]")?.querySelector(".catalogue-caption h3")?.textContent?.trim() || slug;
+    button.setAttribute("aria-label", `Added ${fragranceName} to cart`);
+  });
+
+  renderCards();
+</script>

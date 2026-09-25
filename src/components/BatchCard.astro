@@ -1,16 +1,29 @@
 ---
 import type { Batch } from "../data/batches";
 import { whatsappUrl, withBase } from "../data/site";
+import WhatsAppIcon from "./WhatsAppIcon.astro";
 
 interface Props {
   batch: Batch;
+  detailsHref?: string;
 }
 
-const { batch } = Astro.props;
+const { batch, detailsHref } = Astro.props;
 ---
 
 <li class="catalogue-item" data-product-card data-product-slug={batch.slug} data-category={batch.category} data-audience={batch.audience || ""}>
-  <button class="catalogue-main" type="button" data-product-details={batch.slug} aria-label={`View details for ${batch.name}`}>
+  {detailsHref ? (
+    <a class="catalogue-main" href={detailsHref} aria-label={`View details for ${batch.name}`}>
+      <figure class="catalogue-image">
+        {batch.image ? <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} width="900" height="972" loading="lazy" decoding="async" /> : <div class="batch-placeholder" aria-hidden="true"><span>H&amp;N</span></div>}
+      </figure>
+      <div class="catalogue-caption">
+        <h3>{batch.name}</h3>
+        {batch.price !== undefined && <p class="catalogue-price">{batch.originalPrice !== undefined && <del>PKR {batch.originalPrice.toLocaleString("en-PK")}</del>}<span>PKR {batch.price.toLocaleString("en-PK")}</span></p>}
+      </div>
+    </a>
+  ) : (
+    <button class="catalogue-main" type="button" data-product-details={batch.slug} aria-label={`View details for ${batch.name}`}>
     <figure class="catalogue-image">
       {batch.image ? (
         <img src={withBase(batch.image)} alt={batch.imageAlt || batch.name} width="900" height="972" loading="lazy" decoding="async" />
@@ -27,9 +40,10 @@ const { batch } = Astro.props;
         </p>
       )}
     </div>
-  </button>
+    </button>
+  )}
   <div class="catalogue-actions">
     <button class="catalogue-shop" type="button" data-add-to-cart={batch.slug} aria-label={`Add ${batch.name} to cart`} title="Add to cart"><span aria-hidden="true">＋</span></button>
-    <a class="catalogue-ask" href={whatsappUrl(`Hi H&N Scents, I would like to ask about ${batch.name}.`)} target="_blank" rel="noreferrer" aria-label={`Ask about ${batch.name} on WhatsApp`} title="Ask on WhatsApp"><span aria-hidden="true">↗</span></a>
+    <a class="catalogue-ask" href={whatsappUrl(`Hi H&N Scents, I would like to ask about ${batch.name}.`)} target="_blank" rel="noreferrer" aria-label={`Ask about ${batch.name} on WhatsApp`} title="Ask on WhatsApp"><WhatsAppIcon /></a>
   </div>
 </li>
