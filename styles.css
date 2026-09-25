@@ -63,8 +63,8 @@ footer {
 .brand-lockup img {
   width: 38px;
   height: 38px;
-  object-fit: cover;
-  mix-blend-mode: multiply;
+  object-fit: contain;
+  mix-blend-mode: normal;
 }
 
 .wordmark {
