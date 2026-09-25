@@ -15,7 +15,7 @@ const english = {
   "nav.categories": "Categories",
   "nav.shopAll": "Shop all",
   "nav.packaging": "Packaging",
-  "nav.contact": "Contact",
+  "nav.contact": "Contact Us",
   "nav.reviews": "Reviews",
   "nav.shop": "Shop on WhatsApp",
   "nav.cart": "Cart",

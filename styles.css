@@ -149,6 +149,7 @@ footer a:hover,
   letter-spacing: .08em;
   text-transform: uppercase;
 }
+.cart-icon { width: .95rem; height: .95rem; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
 
 .cart-trigger:hover { color: var(--cedar); }
 
