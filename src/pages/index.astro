@@ -45,7 +45,10 @@ const catalogueSchema = {
   }))
 };
 
-const catalogueJson = JSON.stringify(batches).replace(/</g, "\\u003c");
+const catalogueJson = JSON.stringify(batches.map((batch) => ({
+  ...batch,
+  image: batch.image ? withBase(batch.image) : undefined
+}))).replace(/</g, "\\u003c");
 ---
 
 <BaseLayout
