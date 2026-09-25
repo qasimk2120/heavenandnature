@@ -1723,3 +1723,6 @@ body { font-family: var(--editorial); }
 
 /* Keep the contact action visibly distinct in the header. */
 .header-primary-links > a .whatsapp-icon, .site-nav .contact-nav-link .whatsapp-icon { width: 1.12rem; height: 1.12rem; flex-basis: 1.12rem; color: var(--cedar); stroke-width: 1.8; }
+
+.nav-categories > summary { display: inline-flex; align-items: center; gap: .35rem; }
+.category-icon { display: inline-block; width: 1rem; height: 1rem; flex: 0 0 1rem; fill: none; stroke: var(--cedar); stroke-width: 1.35; stroke-linejoin: round; vertical-align: -.16em; }
