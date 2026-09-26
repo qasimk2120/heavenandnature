@@ -641,7 +641,7 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
   align-items: start;
 }
 
-.product-dialog-image { height: clamp(190px, 34vh, 290px); margin: 0; background: #eee5da; }
+.product-dialog-image { height: clamp(330px, 56vh, 440px); margin: 0; overflow: hidden; background: #eee5da; }
 
 .product-dialog-image img {
   display: block;
@@ -649,7 +649,8 @@ h2 { font-size: clamp(2.8rem, 5vw, 5rem); line-height: .95; }
   height: 100%;
   max-width: none;
   max-height: none;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center 58%;
 }
 
 .dialog-close {
